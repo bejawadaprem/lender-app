@@ -1,4 +1,4 @@
-# main.py
+
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen,ScreenManager
 from kivy.uix.boxlayout import BoxLayout

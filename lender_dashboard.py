@@ -11,7 +11,7 @@ from kivymd.uix.filemanager import MDFileManager
 
 from lender_view_loans import ViewLoansScreen
 from lender_view_loans_request import ViewLoansRequest
-
+from lender_view_extension_request import NewExtension
 if platform == 'android':
     from kivy.uix.button import Button
     from kivy.uix.modalview import ModalView
@@ -1483,6 +1483,19 @@ class LenderDashboard(Screen):
 
         # Switch to the LoginScreen
         sm.current = ' ViewLoansScreen'
+
+    def newloan_extension(self):
+        # self.manager.current = 'ViewProfileScreen'
+        sm = self.manager
+
+        # Create a new instance of the LoginScreen
+        profile_screen = NewExtension(name=' NewExtension')
+
+        # Add the LoginScreen to the existing ScreenManager
+        sm.add_widget(profile_screen)
+
+        # Switch to the LoginScreen
+        sm.current = ' NewExtension'
 
 
 
