@@ -13,15 +13,10 @@ BorrLanding = '''
     BorrowerLanding:
     BorrowerHowScreen:
     
-
-
 <BorrowerLanding>:
     ScrollView:
         MDFloatLayout:
             md_bg_color:1,1,1,1
-
-
-
             Image:
                 source: "LOGO.png"
                 pos_hint: {'center_x': 0.5, 'center_y': 0.91}
@@ -386,9 +381,7 @@ BorrLanding = '''
 
 
 class BorrowerLanding(Screen):
-
     Builder.load_string(BorrLanding)
-
 
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
@@ -410,8 +403,6 @@ class BorrowerLanding(Screen):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'DashScreen'  # Replace with the actual name of your previous screen
 
-
-
     def go_to_borrower_landing(self):
         # self.root.current = "BorrowerScreen"
         sm = self.manager
@@ -421,7 +412,7 @@ class BorrowerLanding(Screen):
         sm.current = 'BorrowerHowScreen'
 
     def go_to_borrower_screen(self):
-        #self.root.current = "BorrowerScreen"
+        # self.root.current = "BorrowerScreen"
         sm = self.manager
         borrower_screen = BorrowerScreen(name='BorrowerScreen')
         sm.add_widget(borrower_screen)
@@ -462,12 +453,3 @@ class BorrowerHowScreen(Screen):
 
 class MyScreenManager(ScreenManager):
     pass
-
-
-
-
-
-
-
-
-

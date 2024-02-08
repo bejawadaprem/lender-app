@@ -3,7 +3,7 @@ import sqlite3
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRaisedButton, MDFlatButton
@@ -183,7 +183,7 @@ class LoginScreen(Screen):
         password_list = []
         a = 0
         for i in data:
-            a+=1
+            a += 1
             email_list.append(i['email'])
             password_list.append(i['password_hash'])
 
@@ -268,6 +268,7 @@ class LoginScreen(Screen):
 
     def on_start(self):
         Window.softinput_mode = "below_target"
+
     def go_back(self):
 
         self.manager.transition = SlideTransition(direction='right')
@@ -275,7 +276,6 @@ class LoginScreen(Screen):
 
     def login_data(self):
         return anvil.server.call('login_data')
-
 
 
 class MyScreenManager(ScreenManager):

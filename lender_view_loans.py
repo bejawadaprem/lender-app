@@ -1,14 +1,13 @@
-
 import anvil.server
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 import sqlite3
 import anvil.server
 from kivy.uix.screenmanager import Screen, SlideTransition
 
-view_loans ='''
+view_loans = '''
 <WindowManager>:
     ViewLoansScreen:
     ALlLoansScreen:
@@ -217,6 +216,8 @@ for i in range(a):
 Builder.load_string(view_loans)
 conn = sqlite3.connect('fin_user_profile.db')
 cursor = conn.cursor()
+
+
 class ALlLoansScreen(Screen):
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
@@ -237,6 +238,7 @@ class ALlLoansScreen(Screen):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderDashboard'
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -337,19 +339,23 @@ class ViewLoansScreen(Screen):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderDashboard'
+
     def on_back_button_press(self):
         self.manager.current = 'LenderDashboard'
-    def all_loanscreen (self):
-        #self.manager.current = 'ViewProfileScreen'
+
+    def all_loanscreen(self):
+        # self.manager.current = 'ViewProfileScreen'
         sm = self.manager
 
         # Create a new instance of the LoginScreen
-        profile_screen =  ALlLoansScreen(name=' ALlLoansScreen')
+        profile_screen = ALlLoansScreen(name=' ALlLoansScreen')
 
         # Add the LoginScreen to the existing ScreenManager
         sm.add_widget(profile_screen)
 
         # Switch to the LoginScreen
         sm.current = ' ALlLoansScreen'
+
+
 class MyScreenManager(ScreenManager):
     pass

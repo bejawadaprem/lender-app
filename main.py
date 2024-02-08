@@ -8,6 +8,8 @@ from homepage import MainScreen
 import anvil.server
 
 anvil.server.connect("server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT")
+
+
 class MyApp(MDApp):
     def build(self):
 
@@ -18,14 +20,13 @@ class MyApp(MDApp):
 
         return sm
 
-
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_keyboard)
         Window.bind(on_keyboard=self.on_back_button)
 
     def on_pre_leave(self):
-       Window.unbind(on_keyboard=self.on_keyboard)
-       Window.unbind(on_keyboard=self.on_back_button)
+        Window.unbind(on_keyboard=self.on_keyboard)
+        Window.unbind(on_keyboard=self.on_back_button)
 
     def on_back_button(self, instance, key, scancode, codepoint, modifier):
 
@@ -40,9 +41,9 @@ class MyApp(MDApp):
             self.screen_manager.y = 0
         return True
 
-
     def on_start(self):
         Window.softinput_mode = "below_target"
+
 
 class MyScreenManager(ScreenManager):
     pass

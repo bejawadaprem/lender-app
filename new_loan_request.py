@@ -13,8 +13,6 @@ user_helpers2 = """
     NewloanScreen1:
     NewloanScreen2:
     
-    
-
 <NewloanScreen>:
 
     BoxLayout:
@@ -588,6 +586,7 @@ user_helpers2 = """
 
 class NewloanScreen(Screen):
     Builder.load_string(user_helpers2)
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_back_button)
 
@@ -606,6 +605,7 @@ class NewloanScreen(Screen):
 
     def current(self):
         self.manager.current = 'DashboardScreen'
+
     def go_to_newloan_screen1(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -618,6 +618,7 @@ class NewloanScreen(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'NewloanScreen1'
+
 
 class NewloanScreen1(Screen):
     def on_pre_enter(self):
@@ -638,6 +639,7 @@ class NewloanScreen1(Screen):
 
     def current(self):
         self.manager.current = 'NewloanScreen'
+
     def go_to_newloan_screen2(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -650,6 +652,8 @@ class NewloanScreen1(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'NewloanScreen2'
+
+
 class NewloanScreen2(Screen):
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_back_button)

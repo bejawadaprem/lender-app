@@ -2830,8 +2830,8 @@ cursor = conn.cursor()
 
 
 class LenderScreen(Screen):
-
     Builder.load_string(KV)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.date_picker = MDDatePicker()
@@ -2891,9 +2891,7 @@ class LenderScreen(Screen):
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
-    #def go_to_lenderscreen1(self):
-
-
+    # def go_to_lenderscreen1(self):
 
 
 class LenderScreen1(Screen):
@@ -3039,7 +3037,7 @@ class LenderScreen2(Screen):
         cursor.execute("UPDATE fin_registration_table SET aadhar_number = ?, pan_number = ? WHERE customer_id = ?",
                        (aadhar_number, pan_number, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreen3'
+        # self.manager.current = 'LenderScreen3'
         sm = self.manager
         lender_screen3 = LenderScreen3(name='LenderScreen3')
         sm.add_widget(lender_screen3)
@@ -3229,6 +3227,7 @@ class LenderScreen_Edu_10th(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderScreen3'
+
     def go_to_lender_screen4(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -3241,7 +3240,6 @@ class LenderScreen_Edu_10th(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreen4'
-
 
 
 class LenderScreen_Edu_Intermediate(Screen):
@@ -3374,6 +3372,8 @@ class LenderScreen_Edu_Intermediate(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreen4'
+
+
 class LenderScreen_Edu_Bachelors(Screen):
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
@@ -3531,6 +3531,8 @@ class LenderScreen_Edu_Bachelors(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreen4'
+
+
 class LenderScreen_Edu_Masters(Screen):
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
@@ -3713,6 +3715,8 @@ class LenderScreen_Edu_Masters(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreen4'
+
+
 class LenderScreen_Edu_PHD(Screen):
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
@@ -3904,6 +3908,7 @@ class LenderScreen_Edu_PHD(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderScreen3'
+
     def go_to_lender_screen4(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -3916,6 +3921,7 @@ class LenderScreen_Edu_PHD(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreen4'
+
 
 class LenderScreen4(Screen):
     def add_data(self, street, city, zip_code, state, country):
@@ -3932,7 +3938,7 @@ class LenderScreen4(Screen):
             "UPDATE fin_registration_table SET street_name = ?, city_name = ?, zip_code = ?, state_name = ?, country_name = ? WHERE customer_id = ?",
             (street, city, zip_code, state, country, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreen5'
+        # self.manager.current = 'LenderScreen5'
         sm = self.manager
         lender_screen = LenderScreen5(name='LenderScreen5')
         sm.add_widget(lender_screen)
@@ -3963,11 +3969,10 @@ class LenderScreen4(Screen):
         self.manager.current = 'LenderScreen3'
 
 
-
 class LenderScreen5(Screen):
     def next_pressed(self, id, investment, period):
         if id == 'Individual':
-            #self.manager.current = 'LenderScreenIndividualForm1'
+            # self.manager.current = 'LenderScreenIndividualForm1'
             sm = self.manager
             lender_screen = LenderScreenIndividualForm1(name='LenderScreenIndividualForm1')
             sm.add_widget(lender_screen)
@@ -3975,7 +3980,7 @@ class LenderScreen5(Screen):
             sm.current = 'LenderScreenIndividualForm1'
 
         elif id == 'Institutional':
-            #++++++++
+            # ++++++++
             # self.manager.current = 'LenderScreenInstitutionalForm1'
             sm = self.manager
             lender_screen = LenderScreenInstitutionalForm1(name='LenderScreenInstitutionalForm1')
@@ -4035,7 +4040,7 @@ class LenderScreenInstitutionalForm1(Screen):
             "UPDATE fin_registration_table SET business_name = ?, business_location = ?, business_address = ?, business_branch_name = ? WHERE customer_id = ?",
             (business_name, business_location, business_address, business_branch_name, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreenInstitutionalForm2'
+        # self.manager.current = 'LenderScreenInstitutionalForm2'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalForm2(name='LenderScreenInstitutionalForm2')
         sm.add_widget(lender_screen)
@@ -4077,7 +4082,7 @@ class LenderScreenInstitutionalForm2(Screen):
             "UPDATE fin_registration_table SET business_type = ?, nearest_location = ?, no_of_employees_working = ?, year_of_estd = ? WHERE customer_id = ?",
             (business_type, nearest_location, no_of_employees_working, year_of_estd, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreenInstitutionalForm3'
+        # self.manager.current = 'LenderScreenInstitutionalForm3'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalForm3(name='LenderScreenInstitutionalForm3')
         sm.add_widget(lender_screen)
@@ -4192,7 +4197,7 @@ class LenderScreenInstitutionalForm3(Screen):
             "UPDATE fin_registration_table SET industry_type = ?, last_six_months_turnover = ? WHERE customer_id = ?",
             (industry_type, last_six_months_turnover, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreenInstitutionalForm4'
+        # self.manager.current = 'LenderScreenInstitutionalForm4'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalForm4(name='LenderScreenInstitutionalForm4')
         sm.add_widget(lender_screen)
@@ -4238,7 +4243,7 @@ class LenderScreenInstitutionalForm4(Screen):
             "UPDATE fin_registration_table SET director_name = ?, director_mobile_number = ?, DIN = ?, CIN = ? WHERE customer_id = ?",
             (director_name, director_mobile_number, DIN, CIN, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreenInstitutionalForm5'
+        # self.manager.current = 'LenderScreenInstitutionalForm5'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalForm5(name='LenderScreenInstitutionalForm5')
         sm.add_widget(lender_screen)
@@ -4358,13 +4363,12 @@ class LenderScreenInstitutionalForm5(Screen):
             "UPDATE fin_registration_table SET registered_office_address = ? WHERE customer_id = ?",
             (registered_office_address, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'LenderScreenInstitutionalBankForm1'
+        # self.manager.current = 'LenderScreenInstitutionalBankForm1'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalBankForm1(name='LenderScreenInstitutionalBankForm1')
         sm.add_widget(lender_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'LenderScreenInstitutionalBankForm1'
-
 
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
@@ -4576,6 +4580,7 @@ class LenderScreenIndividualForm3(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreenIndividualBankForm1'
+
     def on_company_pin_code_touch_down(self):
         # Change keyboard mode to numeric when the mobile number text input is touched
         self.ids.company_pin_code.input_type = 'number'
@@ -4616,7 +4621,6 @@ class LenderScreenIndividualBankForm1(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'LenderScreenIndividualBankForm2'
-
 
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
@@ -4687,7 +4691,7 @@ class LenderScreenInstitutionalBankForm1(Screen):
             "UPDATE fin_registration_table SET account_holder_name = ?, account_type = ?, account_number = ?, bank_name = ? WHERE customer_id = ?",
             (account_holder_name, account_type, account_number, bank_name, row_id_list[log_index]))
         conn.commit()
-       #self.manager.current = 'LenderScreenInstitutionalBankForm2'
+        # self.manager.current = 'LenderScreenInstitutionalBankForm2'
         sm = self.manager
         lender_screen = LenderScreenInstitutionalBankForm2(name='LenderScreenInstitutionalBankForm2')
         sm.add_widget(lender_screen)

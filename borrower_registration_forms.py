@@ -2995,8 +2995,8 @@ cursor = conn.cursor()
 
 
 class BorrowerScreen(Screen):
-
     Builder.load_string(Borrower)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.date_picker = MDDatePicker()
@@ -3026,7 +3026,7 @@ class BorrowerScreen(Screen):
             "UPDATE fin_registration_table SET name = ?, gender = ?,  date_of_birth = ?, user_type = ? WHERE customer_id = ?",
             (name, gender, date_of_birth, b, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen1'
+        # self.manager.current = 'BorrowerScreen1'
         sm = self.manager
         borrower_screen = BorrowerScreen1(name='BorrowerScreen1')
         sm.add_widget(borrower_screen)
@@ -3072,13 +3072,12 @@ class BorrowerScreen1(Screen):
             "UPDATE fin_registration_table SET mobile_number = ?, alternate_email = ? WHERE customer_id = ?",
             (mobile_number, alternate_email, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen2'
+        # self.manager.current = 'BorrowerScreen2'
         sm = self.manager
         borrower_screen = BorrowerScreen2(name='BorrowerScreen2')
         sm.add_widget(borrower_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'BorrowerScreen2'
-
 
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
@@ -3197,7 +3196,7 @@ class BorrowerScreen2(Screen):
         cursor.execute("UPDATE fin_registration_table SET aadhar_number = ?, pan_number = ? WHERE customer_id = ?",
                        (aadhar_number, pan_number, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen3'
+        # self.manager.current = 'BorrowerScreen3'
         sm = self.manager
         borrower_screen = BorrowerScreen3(name='BorrowerScreen3')
         sm.add_widget(borrower_screen)
@@ -3244,21 +3243,21 @@ class BorrowerScreen3(Screen):
             sm.current = 'BorrowerScreen_Edu_Intermediate'
 
         elif id == 'Bachelors':
-            #self.manager.current = 'BorrowerScreen_Edu_Bachelors'
+            # self.manager.current = 'BorrowerScreen_Edu_Bachelors'
             sm = self.manager
             lender_screen = BorrowerScreen_Edu_Bachelors(name='BorrowerScreen_Edu_Bachelors')
             sm.add_widget(lender_screen)
             sm.transition.direction = 'left'  # Set the transition direction explicitly
             sm.current = 'BorrowerScreen_Edu_Bachelors'
         elif id == 'Masters':
-            #self.manager.current = 'BorrowerScreen_Edu_Masters'
+            # self.manager.current = 'BorrowerScreen_Edu_Masters'
             sm = self.manager
             lender_screen = BorrowerScreen_Edu_Masters(name='BorrowerScreen_Edu_Masters')
             sm.add_widget(lender_screen)
             sm.transition.direction = 'left'  # Set the transition direction explicitly
             sm.current = 'BorrowerScreen_Edu_Masters'
         elif id == 'PHD':
-            #self.manager.current = 'BorrowerScreen_Edu_PHD'
+            # self.manager.current = 'BorrowerScreen_Edu_PHD'
             sm = self.manager
             lender_screen = BorrowerScreen_Edu_PHD(name='BorrowerScreen_Edu_PHD')
             sm.add_widget(lender_screen)
@@ -3679,6 +3678,7 @@ class BorrowerScreen_Edu_Bachelors(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'BorrowerScreen3'
+
     def go_to_borrower_screen(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -3691,6 +3691,7 @@ class BorrowerScreen_Edu_Bachelors(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'BorrowerScreen4'
+
 
 class BorrowerScreen_Edu_Masters(Screen):
     def check_and_open_file_manager1(self):
@@ -3861,6 +3862,7 @@ class BorrowerScreen_Edu_Masters(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'BorrowerScreen3'
+
     def go_to_borrower_screen(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -3873,6 +3875,7 @@ class BorrowerScreen_Edu_Masters(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'BorrowerScreen4'
+
 
 class BorrowerScreen_Edu_PHD(Screen):
     def check_and_open_file_manager1(self):
@@ -4065,6 +4068,7 @@ class BorrowerScreen_Edu_PHD(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'BorrowerScreen3'
+
     def go_to_borrower_screen(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -4077,6 +4081,7 @@ class BorrowerScreen_Edu_PHD(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'BorrowerScreen4'
+
 
 class BorrowerScreen4(Screen):
     def add_data(self, street, city, zip_code, state, country):
@@ -4094,7 +4099,7 @@ class BorrowerScreen4(Screen):
             "UPDATE fin_registration_table SET street_name = ?, city_name = ?, zip_code = ?, state_name = ?, country_name = ? WHERE customer_id = ?",
             (street, city, zip_code, state, country, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen5'
+        # self.manager.current = 'BorrowerScreen5'
         sm = self.manager
         borrower_screen = BorrowerScreen5(name='BorrowerScreen5')
         sm.add_widget(borrower_screen)
@@ -4148,7 +4153,7 @@ class BorrowerScreen5(Screen):
             "UPDATE fin_registration_table SET father_name = ?, father_age = ?, father_occupation = ?, father_ph_no = ? WHERE customer_id = ?",
             (father_name, father_age, father_occupation, father_ph_no, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen6'
+        # self.manager.current = 'BorrowerScreen6'
         sm = self.manager
         borrower_screen = BorrowerScreen6(name='BorrowerScreen6')
         sm.add_widget(borrower_screen)
@@ -4198,7 +4203,7 @@ class BorrowerScreen6(Screen):
             "UPDATE fin_registration_table SET mother_name = ?, mother_age = ?, mother_occupation = ?, mother_ph_no = ? WHERE customer_id = ?",
             (mother_name, mother_age, mother_occupation, mother_ph_no, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen7'
+        # self.manager.current = 'BorrowerScreen7'
         sm = self.manager
         borrower_screen = BorrowerScreen7(name='BorrowerScreen7')
         sm.add_widget(borrower_screen)
@@ -4242,7 +4247,7 @@ class BorrowerScreen7(Screen):
             (spinner_id, row_id_list[log_index]))
         conn.commit()
         if spinner_id == 'Student':
-            #self.manager.current = 'BorrowerScreen8'
+            # self.manager.current = 'BorrowerScreen8'
             sm = self.manager
             borrower_screen = BorrowerScreen8(name='BorrowerScreen8')
             sm.add_widget(borrower_screen)
@@ -4250,7 +4255,7 @@ class BorrowerScreen7(Screen):
             sm.current = 'BorrowerScreen8'
 
         elif spinner_id == 'Business':
-            #self.manager.current = 'BorrowerScreen9'
+            # self.manager.current = 'BorrowerScreen9'
             sm = self.manager
             borrower_screen = BorrowerScreen9(name='BorrowerScreen9')
             sm.add_widget(borrower_screen)
@@ -4258,7 +4263,7 @@ class BorrowerScreen7(Screen):
             sm.current = 'BorrowerScreen9'
 
         elif spinner_id == 'Employee':
-            #self.manager.current = 'BorrowerScreen12'
+            # self.manager.current = 'BorrowerScreen12'
             sm = self.manager
             borrower_screen = BorrowerScreen12(name='BorrowerScreen12')
             sm.add_widget(borrower_screen)
@@ -4374,7 +4379,7 @@ class BorrowerScreen8(Screen):
             "UPDATE fin_registration_table SET collage_name = ?, college_address = ?, college_id = ? WHERE customer_id = ?",
             (collage_name, college_address, collage_id, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen15'
+        # self.manager.current = 'BorrowerScreen15'
         sm = self.manager
         borrower_screen = BorrowerScreen15(name='BorrowerScreen15')
         sm.add_widget(borrower_screen)
@@ -4416,7 +4421,7 @@ class BorrowerScreen9(Screen):
             "UPDATE fin_registration_table SET business_name = ?, business_location = ?, business_address = ? WHERE customer_id = ?",
             (business_name, business_location, business_address, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen10'
+        # self.manager.current = 'BorrowerScreen10'
         sm = self.manager
         borrower_screen = BorrowerScreen10(name='BorrowerScreen10')
         sm.add_widget(borrower_screen)
@@ -4459,7 +4464,7 @@ class BorrowerScreen10(Screen):
             (landmark, business_type, no_of_employees_working, registered_office_address, year_of_estd,
              row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen15'
+        # self.manager.current = 'BorrowerScreen15'
         sm = self.manager
         borrower_screen = BorrowerScreen15(name='BorrowerScreen15')
         sm.add_widget(borrower_screen)
@@ -4578,7 +4583,7 @@ class BorrowerScreen11(Screen):
             "UPDATE fin_registration_table SET industry_type = ?, last_six_months_turnover = ? WHERE customer_id = ?",
             (industry_type, last_six_months_turnover, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen12'
+        # self.manager.current = 'BorrowerScreen12'
         sm = self.manager
         borrower_screen = BorrowerScreen12(name='BorrowerScreen12')
         sm.add_widget(borrower_screen)
@@ -4621,7 +4626,7 @@ class BorrowerScreen12(Screen):
             "UPDATE fin_registration_table SET employment_type = ?, company_name = ?, organization_type = ? WHERE customer_id = ?",
             (employeent_type, company_name, organization, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen13'
+        # self.manager.current = 'BorrowerScreen13'
         sm = self.manager
         borrower_screen = BorrowerScreen13(name='BorrowerScreen13')
         sm.add_widget(borrower_screen)
@@ -4663,7 +4668,7 @@ class BorrowerScreen14(Screen):
             "UPDATE fin_registration_table SET company_address = ?, company_pincode = ?, company_country = ?, landmark = ?, business_number = ? WHERE customer_id = ?",
             (company_address, company_pincode, company_country, landmark, business_number, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen15'
+        # self.manager.current = 'BorrowerScreen15'
         sm = self.manager
         borrower_screen = BorrowerScreen15(name='BorrowerScreen15')
         sm.add_widget(borrower_screen)
@@ -4702,6 +4707,7 @@ class BorrowerScreen13(Screen):
     def on_annual_salary_touch_down(self):
         # Change keyboard mode to numeric when the mobile number text input is touched
         self.ids.annual_salary.input_type = 'number'
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -4812,7 +4818,7 @@ class BorrowerScreen13(Screen):
             "UPDATE fin_registration_table SET annual_salary = ?, designation = ? WHERE customer_id = ?",
             (annual_salary, designation, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen14'
+        # self.manager.current = 'BorrowerScreen14'
         sm = self.manager
         borrower_screen = BorrowerScreen14(name='BorrowerScreen14')
         sm.add_widget(borrower_screen)
@@ -4856,7 +4862,7 @@ class BorrowerScreen15(Screen):
         conn.commit()
 
         if marital_status_id == 'Un-Married':
-            #self.manager.current = 'BorrowerScreen18'
+            # self.manager.current = 'BorrowerScreen18'
             sm = self.manager
             borrower_screen = BorrowerScreen18(name='BorrowerScreen18')
             sm.add_widget(borrower_screen)
@@ -4864,7 +4870,7 @@ class BorrowerScreen15(Screen):
             sm.current = 'BorrowerScreen18'
 
         elif marital_status_id == 'Married':
-            #self.manager.current = 'BorrowerScreen16'
+            # self.manager.current = 'BorrowerScreen16'
             sm = self.manager
             borrower_screen = BorrowerScreen16(name='BorrowerScreen16')
             sm.add_widget(borrower_screen)
@@ -4872,7 +4878,7 @@ class BorrowerScreen15(Screen):
             sm.current = 'BorrowerScreen16'
 
         elif marital_status_id == 'Divorced':
-            #self.manager.current = 'BorrowerScreen18'
+            # self.manager.current = 'BorrowerScreen18'
             sm = self.manager
             borrower_screen = BorrowerScreen18(name='BorrowerScreen18')
             sm.add_widget(borrower_screen)
@@ -4933,7 +4939,7 @@ class BorrowerScreen16(Screen):
             "UPDATE fin_registration_table SET spouse_name = ?,spouse_date_textfield = ?, spouse_mobile = ?, spouse_profession = ? WHERE customer_id = ?",
             (spouse_name, spouse_date_textfield, spouse_mobile, spouse_profession, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen17'
+        # self.manager.current = 'BorrowerScreen17'
         sm = self.manager
         borrower_screen = BorrowerScreen17(name='BorrowerScreen17')
         sm.add_widget(borrower_screen)
@@ -4984,7 +4990,7 @@ class BorrowerScreen17(Screen):
             (spouse_company_name, spouse_company_address, spouse_annual_salary, spouse_office_no,
              row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen18'
+        # self.manager.current = 'BorrowerScreen18'
         sm = self.manager
         borrower_screen = BorrowerScreen18(name='BorrowerScreen18')
         sm.add_widget(borrower_screen)
@@ -5026,7 +5032,7 @@ class BorrowerScreen18(Screen):
             "UPDATE fin_registration_table SET account_holder_name = ?, account_type = ?, account_number = ?, bank_name = ? WHERE customer_id = ?",
             (account_holder_name, account_type, account_number, bank_name, row_id_list[log_index]))
         conn.commit()
-        #self.manager.current = 'BorrowerScreen19'
+        # self.manager.current = 'BorrowerScreen19'
         sm = self.manager
         borrower_screen = BorrowerScreen19(name='BorrowerScreen19')
         sm.add_widget(borrower_screen)
@@ -5069,7 +5075,7 @@ class BorrowerScreen19(Screen):
             (bank_id, branch_name, row_id_list[log_index]))
         conn.commit()
 
-        #self.manager.current = 'borrower_dashboard'
+        # self.manager.current = 'borrower_dashboard'
         sm = self.manager
         borrower_screen = DashboardScreen(name='DashboardScreen')
         sm.add_widget(borrower_screen)

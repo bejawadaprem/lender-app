@@ -1,7 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 from kivy.utils import platform
 from kivy.clock import mainthread
 from kivymd.uix.filemanager import MDFileManager
@@ -24,11 +24,6 @@ user_helpers = """
     LoansDetails:
     Foreclosure:
     ForecloseDetails:
-    
-    
-    
-    
-    
 
 <DashboardScreen>:
     MDFloatLayout:
@@ -2815,8 +2810,8 @@ user_helpers = """
 
 
 class DashboardScreen(Screen):
-
     Builder.load_string(user_helpers)
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_back_button)
 
@@ -2993,6 +2988,8 @@ class LoansDetails(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'Foreclosure'
+
+
 class Foreclosure(Screen):
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_back_button)
@@ -3009,6 +3006,7 @@ class Foreclosure(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LoansDetails'
+
     def go_to_foreclose_details(self):
         # Get the existing ScreenManager
         sm = self.manager
@@ -3021,6 +3019,7 @@ class Foreclosure(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'ForecloseDetails'
+
 
 class ForecloseDetails(Screen):
     def on_pre_enter(self):
@@ -3038,6 +3037,7 @@ class ForecloseDetails(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'Foreclosure'
+
 
 class MyScreenManager(ScreenManager):
     pass

@@ -2,7 +2,7 @@ import anvil.server
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 import sqlite3
 import anvil.server
 from kivy.uix.screenmanager import Screen, SlideTransition
@@ -713,7 +713,6 @@ class NewExtension(Screen):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderDashboard'
 
-
     def approved_loans(self):
         sm = self.manager
         borrower_screen = ApprovedLoansE(name='ApprovedLoansE')
@@ -734,7 +733,6 @@ class NewExtension(Screen):
         sm.add_widget(borrower_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'UnderProcessLoansE'
-
 
     def all_loans(self):
         sm = self.manager
@@ -766,9 +764,9 @@ class ApprovedLoansE(Screen):
             self.screen_manager.y = 0
         return True
 
-
     def on_start(self):
         Window.softinput_mode = "below_target"
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -825,10 +823,12 @@ class ApprovedLoansE(Screen):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_extension_data')
+
     def icon_button_clicked(self, value):
         data = self.get_table_data()  # Fetch data here
         self.manager.current = 'ViewProfileE'
         self.manager.get_screen('ViewProfileE').initialize_with_value(value, data)
+
 
 class ViewAllLoansE(Screen):
     def __init__(self, **kwargs):
@@ -879,7 +879,6 @@ class ViewAllLoansE(Screen):
 
         # Iterate over new loans
 
-
     def populate_loan_data(self, i, k, loan_id, loan_amount, loan_status):
         id_label = f"label_{k}"
         amount = f"amount_{k}"
@@ -905,6 +904,7 @@ class ViewAllLoansE(Screen):
         data = self.get_table_data()  # Fetch data here
         self.manager.current = 'ViewProfileE'
         self.manager.get_screen('ViewProfileE').initialize_with_value(value, data)
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_keyboard)
         Window.bind(on_keyboard=self.on_back_button)
@@ -926,7 +926,6 @@ class ViewAllLoansE(Screen):
             self.screen_manager.y = 0
         return True
 
-
     def on_start(self):
         Window.softinput_mode = "below_target"
 
@@ -938,6 +937,8 @@ class ViewAllLoansE(Screen):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_extension_data')
+
+
 class RejectedLoansE(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -986,6 +987,7 @@ class RejectedLoansE(Screen):
         for i in range(a + 1):
             h += 150
         self.ids.box1.height = h
+
     def icon_button_clicked(self, value):
         data = self.get_table_data()  # Fetch data here
         self.manager.current = 'ViewProfileE'
@@ -1011,7 +1013,6 @@ class RejectedLoansE(Screen):
             # Keyboard is closed, move the screen down
             self.screen_manager.y = 0
         return True
-
 
     def on_start(self):
         Window.softinput_mode = "below_target"
@@ -1089,6 +1090,7 @@ class UnderProcessLoansE(Screen):
     def icon_button_clicked(self, value):
         self.manager.current = 'ViewProfileE'
         self.manager.get_screen('ViewProfileE').initialize_with_value(value)
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_keyboard)
         Window.bind(on_keyboard=self.on_back_button)
@@ -1109,7 +1111,6 @@ class UnderProcessLoansE(Screen):
             # Keyboard is closed, move the screen down
             self.screen_manager.y = 0
         return True
-
 
     def on_start(self):
         Window.softinput_mode = "below_target"
@@ -1153,6 +1154,7 @@ class ViewProfileE(Screen):
             self.ids.reason.text = str(reason_for_extension[index])
             self.ids.remaining_amount.text = str(remaining_amount[index])
             self.ids.interest.text = str(new_emi[index])
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_keyboard)
         Window.bind(on_keyboard=self.on_back_button)
@@ -1174,14 +1176,12 @@ class ViewProfileE(Screen):
             self.screen_manager.y = 0
         return True
 
-
     def on_start(self):
         Window.softinput_mode = "below_target"
 
     def go_back(self):
         screen_manager = NewExtension()
         screen_manager.add_widget(NewExtension(name='NewExtension'))
-
 
     def accept_request(self):
         # Code to send the request to the borrower for accepting the loan extension

@@ -2,7 +2,7 @@ import re
 
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 from kivymd.app import MDApp
 import sqlite3
 
@@ -262,10 +262,8 @@ cursor.execute(''' CREATE TABLE IF NOT EXISTS fin_registration_table (
                                     )
                                 ''')
 
-
 # Commit the changes and close the connection
 conn.commit()
-
 
 
 class SignupScreen(Screen):
@@ -306,7 +304,8 @@ class SignupScreen(Screen):
 
             conn.commit()
             cursor.execute('''INSERT INTO fin_registration_table (customer_id) VALUES (?)''', (next_user_id,))
-            self.add_data(user_id=next_user_id, email=self.ids.email.text, password=self.ids.password.text, name=self.ids.name.text,number=self.ids.mobile.text)
+            self.add_data(user_id=next_user_id, email=self.ids.email.text, password=self.ids.password.text,
+                          name=self.ids.name.text, number=self.ids.mobile.text)
             conn.commit()
         except sqlite3.Error as e:
 
@@ -315,7 +314,6 @@ class SignupScreen(Screen):
     def add_data(self, user_id, email, password, name, number):
         # Ensure 'YOUR_ANVIL_UPLINK_KEY' is replaced with your actual Anvil Uplink key
         anvil.server.call('add_data', user_id, email, password, name, number)
-
 
     def go_to_login(self):
         name = self.ids.name.text
@@ -368,15 +366,12 @@ class SignupScreen(Screen):
 
         snackbar.open()
 
-
-        #self.manager.current = 'LoginScreen'
+        # self.manager.current = 'LoginScreen'
         sm = self.manager
         lender_screen = LoginScreen(name='LoginScreen')
         sm.add_widget(lender_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'LoginScreen'
-
-
 
     def show_validation_error(self, widget, error_text):
         widget.error = True

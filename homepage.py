@@ -1,6 +1,5 @@
-
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen,ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivymd.app import MDApp

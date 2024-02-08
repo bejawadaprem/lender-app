@@ -387,11 +387,10 @@ Landing = '''
 
 
 class LenderLanding(Screen):
-
     Builder.load_string(Landing)
+
     def __init__(self, **kwargs):
         super(LenderLanding, self).__init__(**kwargs)
-
 
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
@@ -413,10 +412,6 @@ class LenderLanding(Screen):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'DashScreen'  # Replace with the actual name of your previous screen
 
-
-
-
-
     def go_to_lender_landing(self):
         print("Going to LenderHowScreen")
         sm = self.manager
@@ -425,13 +420,14 @@ class LenderLanding(Screen):
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'LenderHowScreen'
         print("Switched to LenderHowScreen")
-    def go_to_lenderscreen(self):
 
+    def go_to_lenderscreen(self):
         sm = self.manager
         lender_screen = LenderScreen(name='LenderScreen')
         sm.add_widget(lender_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
         sm.current = 'LenderScreen'
+
 
 class LenderHowScreen(Screen):
     def on_pre_enter(self):
@@ -451,15 +447,5 @@ class LenderHowScreen(Screen):
         self.manager.current = 'LenderLanding'
 
 
-
 class MyScreenManager(ScreenManager):
     pass
-
-
-
-
-
-
-
-
-

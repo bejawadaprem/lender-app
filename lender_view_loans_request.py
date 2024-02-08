@@ -1,13 +1,11 @@
-
 import anvil.server
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 import sqlite3
 import anvil.server
 from kivy.uix.screenmanager import Screen, SlideTransition
-
 
 anvil.server.connect('server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT')
 
@@ -275,6 +273,7 @@ view_loan_request += '''
 '''
 Builder.load_string(view_loan_request)
 
+
 class ViewLoansRequest(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -400,6 +399,7 @@ class ViewLoansProfileScreen(Screen):
             self.ids.limit.text = str(credit_limit[index])
             self.ids.beseem.text = str(beseem_score[index])
             self.ids.name.text = str(name[index])
+
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
@@ -419,6 +419,7 @@ class ViewLoansProfileScreen(Screen):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'ViewLoansRequest'
+
 
 class MyScreenManager(ScreenManager):
     pass

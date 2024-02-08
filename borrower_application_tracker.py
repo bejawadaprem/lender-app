@@ -163,9 +163,11 @@ application_tracker = """
 
 
 """
-class ApplicationTrackerScreen(Screen):
 
+
+class ApplicationTrackerScreen(Screen):
     Builder.load_string(application_tracker)
+
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.on_back_button)
 
@@ -184,6 +186,7 @@ class ApplicationTrackerScreen(Screen):
 
     def borrower_dashboard(self):
         self.manager.current = 'DashboardScreen'
+
 
 class WindowManager(ScreenManager):
     pass

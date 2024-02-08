@@ -1,7 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen, SlideTransition,ScreenManager
+from kivy.uix.screenmanager import Screen, SlideTransition, ScreenManager
 import sqlite3
 import anvil.server
 from kivy.uix.screenmanager import Screen, SlideTransition
@@ -12,14 +12,14 @@ from kivymd.uix.filemanager import MDFileManager
 from lender_view_loans import ViewLoansScreen
 from lender_view_loans_request import ViewLoansRequest
 from lender_view_extension_request import NewExtension
+
 if platform == 'android':
     from kivy.uix.button import Button
     from kivy.uix.modalview import ModalView
     from kivy.clock import Clock
     from android import api_version, mActivity
     from android.permissions import (
-        request_permissions, check_permission, Permission )
-
+        request_permissions, check_permission, Permission)
 
 anvil.server.connect('server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT')
 
@@ -1413,8 +1413,8 @@ cursor = conn.cursor()
 
 
 class LenderDashboard(Screen):
-
     Builder.load_string(user_helpers1)
+
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
@@ -1437,16 +1437,14 @@ class LenderDashboard(Screen):
 
         # Replace with the actual name of your previous screen
 
-
     def homepage(self):
         self.manager.current = 'MainScreen'
 
     def logout(self):
         self.manager.current = 'MainScreen'
 
-
     def profile(self):
-        #self.manager.current = 'ViewProfileScreen'
+        # self.manager.current = 'ViewProfileScreen'
         sm = self.manager
 
         # Create a new instance of the LoginScreen
@@ -1459,7 +1457,7 @@ class LenderDashboard(Screen):
         sm.current = 'ViewProfileScreen'
 
     def view_loan_request(self):
-        #self.manager.current = 'ViewProfileScreen'
+        # self.manager.current = 'ViewProfileScreen'
         sm = self.manager
 
         # Create a new instance of the LoginScreen
@@ -1471,12 +1469,12 @@ class LenderDashboard(Screen):
         # Switch to the LoginScreen
         sm.current = 'ViewLoansRequest'
 
-    def view_loanscreen (self):
-        #self.manager.current = 'ViewProfileScreen'
+    def view_loanscreen(self):
+        # self.manager.current = 'ViewProfileScreen'
         sm = self.manager
 
         # Create a new instance of the LoginScreen
-        profile_screen =  ViewLoansScreen(name=' ViewLoansScreen')
+        profile_screen = ViewLoansScreen(name=' ViewLoansScreen')
 
         # Add the LoginScreen to the existing ScreenManager
         sm.add_widget(profile_screen)
@@ -1496,8 +1494,6 @@ class LenderDashboard(Screen):
 
         # Switch to the LoginScreen
         sm.current = ' NewExtension'
-
-
 
 
 class ViewProfileScreen(Screen):
@@ -1530,8 +1526,6 @@ class ViewProfileScreen(Screen):
         self.ids[image_id].source = path  # Set the source of the Image widget
         self.file_manager.close()
 
-
-
     def exit_manager(self, *args):
         self.file_manager.close()
 
@@ -1556,6 +1550,7 @@ class ViewProfileScreen(Screen):
             on_press=self.bye)
         )
         view.open()
+
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
@@ -1578,6 +1573,7 @@ class ViewProfileScreen(Screen):
 
     def on_back_button_press(self):
         self.manager.current = 'LenderDashboard'
+
 
 class MyScreenManager(ScreenManager):
     pass

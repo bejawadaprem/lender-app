@@ -9,7 +9,7 @@ from kivymd.uix.button import MDRectangleFlatButton
 import sqlite3
 
 from borrowerlanding import BorrowerLanding
-from lender_landing import  LenderLanding
+from lender_landing import LenderLanding
 
 KV = """
 
