@@ -37,7 +37,7 @@ user_helpers1 = """
             md_bg_color:1,1,1,1
             specific_text_color:1/255, 26/255, 51/255, 1
             elevation:2
-            left_action_items: [['menu', lambda x: root.profile()]]
+            left_action_items: [['account', lambda x: root.profile()]]
             right_action_items: [['logout', lambda x: root.logout()]]
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
         Image:
@@ -72,29 +72,6 @@ user_helpers1 = """
                     orientation: 'horizontal'
                     spacing:dp(10)
                     MDLabel:
-                        text: "View Profile "
-                        font_size:dp(14)
-                        bold:True
-                        theme_text_color: 'Custom'
-                        halign: "center"
-                        text_color:1,1,1,1
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-
-            MDFlatButton:
-                size_hint: None, None
-
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
-                size_hint_y: None
-                height: dp(60)
-                size_hint_x: None
-                width: dp(110)
-
-                BoxLayout:
-                    orientation: 'horizontal'
-                    spacing:dp(10)
-                    MDLabel:
                         text: "View Opening Balance"
                         font_size:dp(14)
                         bold:True
@@ -102,6 +79,8 @@ user_helpers1 = """
                         halign: "center"
                         text_color:1,1,1,1
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+
             MDFlatButton:
                 size_hint: None, None
 
@@ -117,6 +96,27 @@ user_helpers1 = """
                     spacing:dp(10)
                     MDLabel:
                         text: "View Available Balance"
+                        font_size:dp(14)
+                        bold:True
+                        theme_text_color: 'Custom'
+                        halign: "center"
+                        text_color:1,1,1,1
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            MDFlatButton:
+                size_hint: None, None
+
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                md_bg_color:0.031, 0.463, 0.91, 1 
+                size_hint_y: None
+                height: dp(60)
+                size_hint_x: None
+                width: dp(110)
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    spacing:dp(10)
+                    MDLabel:
+                        text: "Today's Dues"
                         font_size:dp(14)
                         bold:True
                         theme_text_color: 'Custom'
@@ -260,28 +260,6 @@ user_helpers1 = """
             MDLabel:
                 text:""
 
-            MDFlatButton:
-                size_hint: None, None
-                pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
-                size_hint_y: None
-                height: dp(60)
-                size_hint_x: None
-                width: dp(110)
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    spacing: dp(10)
-                    MDLabel:
-                        text: "View Lost Opportunities"
-                        font_size: dp(14)
-                        bold:True
-                        theme_text_color: 'Custom'
-                        halign: "center"
-                        text_color: 1,1,1,1
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-
         MDIconButton:
             icon:'help-circle'
             theme_text_color: 'Custom'
@@ -314,8 +292,6 @@ user_helpers1 = """
                 size_hint_y: None
                 height: self.minimum_height
 
-
-
                 MDRectangleFlatButton:
                    
                     line_color:1,1,1,1
@@ -333,7 +309,6 @@ user_helpers1 = """
                         id: selected_image1
                         source: "profile.png"
 
-                      
                     MDFloatLayout:
         
                         size_hint:(None,None)
@@ -376,7 +351,6 @@ user_helpers1 = """
                         Line:
                             rounded_rectangle: [self.x + 5, self.y + 0.9, self.width - 2, self.height - 0.5, 10, 10, 10, 10]
                             width: 1  # Border line width
-
 
                     MDTextField:
                         id: customer_id

@@ -34,7 +34,7 @@ user_helpers = """
             md_bg_color:1,1,1,1
             specific_text_color:1/255, 26/255, 51/255, 1
             elevation: 3
-            left_action_items: [['menu', lambda x: root.go_to_profile()]]
+            left_action_items: [['account', lambda x: root.go_to_profile()]]
             right_action_items: [['logout', lambda x: root.logout()]]
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
         Image:
@@ -53,75 +53,7 @@ user_helpers = """
             height: self.minimum_height
             width: self.minimum_width
             size_hint_x: None
-            MDFlatButton:
-                size_hint: None, None
-
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
-
-                size_hint_y: None
-                height: dp(59)
-                size_hint_x: None
-                width: dp(110)
-
-                BoxLayout:
-                    orientation: 'horizontal'
-                    spacing:dp(10)
-                    MDLabel:
-                        text: "My Commitments"
-                        font_size:dp(14)
-                        bold:True
-                        theme_text_color: 'Custom'
-                        halign: "center"
-                        text_color:1,1,1,1
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-
-            MDFlatButton:
-                size_hint: None, None
-
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
-
-                size_hint_y: None
-                height: dp(60)
-                size_hint_x: None
-                width: dp(110)
-
-                BoxLayout:
-                    orientation: 'horizontal'
-                    spacing:dp(10)
-                    MDLabel:
-                        text: "Opening Balance"
-                        font_size:dp(14)
-                        bold:True
-                        theme_text_color: 'Custom'
-                        halign: "center"
-                        text_color:1,1,1,1
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-            MDFlatButton:
-                size_hint: None, None
-
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1       
-                size_hint_y: None
-                height: dp(60)
-                size_hint_x: None
-                width: dp(110)
-
-                BoxLayout:
-                    orientation: 'horizontal'
-                    spacing:dp(10)
-                    MDLabel:
-                        text: "My Returns"
-                        font_size:dp(14)
-                        bold:True
-                        theme_text_color: 'Custom'
-                        halign: "center"
-                        text_color:1,1,1,1
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
+            
             MDFlatButton:
                 size_hint: None, None
 
@@ -279,7 +211,7 @@ user_helpers = """
                     orientation: 'horizontal'
                     spacing:dp(10)
                     MDLabel:
-                        text: "View Profile "
+                        text: "Extended Loan Request"
                         font_size:dp(14)
                         bold:True
                         theme_text_color: 'Custom'
