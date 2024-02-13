@@ -11,7 +11,7 @@ from kivymd.uix.button import MDRaisedButton, MDFlatButton
 import anvil.server
 from dashboard import DashScreen
 
-anvil.server.connect("server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT")
+anvil.server.connect("server_ANJQTKQ62KGHGX2XHC43NVOG-6JH2LHL646DIRMSE")
 
 KV = """
 <WindowManager>:
@@ -157,7 +157,7 @@ class LoginScreen(Screen):
             print(value)
 
     def go_to_dashboard(self):
-        # Get the entered email and password
+
         entered_email = self.ids.email.text
         entered_password = self.ids.password.text
 
@@ -187,7 +187,23 @@ class LoginScreen(Screen):
             email_list.append(i['email'])
             password_list.append(i['password_hash'])
 
-        if user_data:
+        if entered_email in email_list:
+            i = email_list.index(entered_email)
+
+            if (email_list[i] == entered_email) and (password_list[i] == entered_password):
+                self.share_email_with_anvil(email_list[i])
+                sm = self.manager
+                lender_screen = DashScreen(name='DashScreen')
+                sm.add_widget(lender_screen)
+                sm.transition.direction = 'left'  # Set the transition direction explicitly
+                sm.current = 'DashScreen'
+
+            else:
+                self.show_error_dialog("Incorrect email/password")
+
+
+
+        elif user_data:
 
             if user_data[4] == entered_password:  # Fix index to 4 for the password field
 
@@ -210,7 +226,6 @@ class LoginScreen(Screen):
                                         WHERE user_id = ?
                                     ''', (i,))
                         conn.commit()
-
                 sm = self.manager
                 lender_screen = DashScreen(name='DashScreen')
                 sm.add_widget(lender_screen)
@@ -221,15 +236,15 @@ class LoginScreen(Screen):
             else:
 
                 self.show_error_dialog("Incorrect password")
-        elif entered_email in email_list:
-            for i in range(a):
-                print(i, email_list[i], password_list[i])
-                if email_list[i] == entered_email and password_list[i] == entered_password:
-                    self.manager.current = 'DashScreen'
-            print(email_list, password_list, a)
+
         else:
 
-            self.show_error_dialog("Invalid credentials")
+            self.show_error_dialog("Enter valid Email and password")
+
+
+    def share_email_with_anvil(self, email):
+        # Make an API call to Anvil server to share the email
+        anvil.server.call('share_email', email)
 
     def show_error_dialog(self, message):
 

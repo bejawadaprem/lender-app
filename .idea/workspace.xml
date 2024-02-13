@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6cf0679d-622c-4cdd-bf68-04ce800fdca3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/borrower_dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/borrower_dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/borrower_registration_forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/borrower_registration_forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fin_user_profile.db" beforeDir="false" afterPath="$PROJECT_DIR$/fin_user_profile.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lender_dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/lender_dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lender_registration_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/lender_registration_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/signup.py" beforeDir="false" afterPath="$PROJECT_DIR$/signup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0

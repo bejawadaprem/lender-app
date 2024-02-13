@@ -15,7 +15,7 @@ import anvil.server
 
 from login import LoginScreen
 
-anvil.server.connect("server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT")
+anvil.server.connect("server_ANJQTKQ62KGHGX2XHC43NVOG-6JH2LHL646DIRMSE")
 
 KV = """
 <WindowManager>:
@@ -269,6 +269,7 @@ conn.commit()
 class SignupScreen(Screen):
     Builder.load_string(KV)
 
+
     def on_mobile_number_touch_down(self):
         # Change keyboard mode to numeric when the mobile number text input is touched
         self.ids.mobile.input_type = 'number'
@@ -282,6 +283,17 @@ class SignupScreen(Screen):
 
             cursor.execute('SELECT user_id FROM fin_users ORDER BY user_id DESC LIMIT 1')
             latest_user_id = cursor.fetchone()
+
+            c_id = anvil.server.call('profile')
+
+            id_c = []
+            for i in c_id:
+                id_c.append(i['customer_id'])
+
+            if len(id_c) >= 1:
+                user_id = id_c[-1] + 1
+            else:
+                user_id = 1000
 
             if latest_user_id is not None:
                 next_user_id = latest_user_id[0] + 1
@@ -304,7 +316,7 @@ class SignupScreen(Screen):
 
             conn.commit()
             cursor.execute('''INSERT INTO fin_registration_table (customer_id) VALUES (?)''', (next_user_id,))
-            self.add_data(user_id=next_user_id, email=self.ids.email.text, password=self.ids.password.text,
+            self.add_data(user_id=user_id, email=self.ids.email.text, password=self.ids.password.text,
                           name=self.ids.name.text, number=self.ids.mobile.text)
             conn.commit()
         except sqlite3.Error as e:
@@ -356,6 +368,15 @@ class SignupScreen(Screen):
             return
 
         self.save_to_database()
+
+        # Reset input fields
+        self.ids.name.text = ""
+        self.ids.mobile.text = ""
+        self.ids.email.text = ""
+        self.ids.password.text = ""
+        self.ids.password2.text = ""
+        self.ids.terms_checkbox.active = False
+        self.ids.kyc_checkbox.active = False
 
         snackbar = Snackbar(
             text="Signup Successful!",
