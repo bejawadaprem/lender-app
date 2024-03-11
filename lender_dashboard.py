@@ -12,6 +12,14 @@ from kivymd.uix.filemanager import MDFileManager
 from lender_view_loans import ViewLoansScreen
 from lender_view_loans_request import ViewLoansRequest
 from lender_view_extension_request import NewExtension
+from lender_foreclosure_request import DashboardScreenLF
+from lender_today_due import TodayDuesTD
+from kivy.uix.modalview import ModalView
+from kivymd.uix.spinner import MDSpinner
+from kivy.clock import Clock
+from kivy.animation import Animation
+from kivymd.uix.label import MDLabel
+
 
 if platform == 'android':
     from kivy.uix.button import Button
@@ -21,13 +29,13 @@ if platform == 'android':
     from android.permissions import (
         request_permissions, check_permission, Permission)
 
-anvil.server.connect('server_BQ6Z7GHPS3ZH5TPKQJBHTYJI-ZVMP6VAENIF2GORT')
+anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
 
 user_helpers1 = """
 <WindowManager>:
     LenderDashboard:
     ViewProfileScreen:
-    
+
 <LenderDashboard>
     MDFloatLayout:
         md_bg_color:1,1,1,1
@@ -38,7 +46,7 @@ user_helpers1 = """
             specific_text_color:1/255, 26/255, 51/255, 1
             elevation:2
             left_action_items: [['account', lambda x: root.profile()]]
-            right_action_items: [['logout', lambda x: root.logout()]]
+            right_action_items: [['wallet', lambda x:root.go_to_wallet()],['logout', lambda x: root.logout()]]
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
         Image:
             source:"LOGO.png"
@@ -61,7 +69,7 @@ user_helpers1 = """
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1 
 
                 size_hint_y: None
                 height: dp(60)
@@ -85,7 +93,7 @@ user_helpers1 = """
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
+                md_bg_color:0.043, 0.145, 0.278, 1 
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -102,11 +110,13 @@ user_helpers1 = """
                         halign: "center"
                         text_color:1,1,1,1
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        
             MDFlatButton:
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
+                md_bg_color:0.043, 0.145, 0.278, 1 
+                on_release: root.lender_today_due()
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -128,7 +138,7 @@ user_helpers1 = """
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
+                md_bg_color:0.043, 0.145, 0.278, 1
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -150,7 +160,7 @@ user_helpers1 = """
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1  
+                md_bg_color:0.043, 0.145, 0.278, 1  
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -167,13 +177,13 @@ user_helpers1 = """
                         halign: "center"
                         text_color:1,1,1,1
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                        
+
 
             MDFlatButton:
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
+                md_bg_color:0.043, 0.145, 0.278, 1 
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -197,7 +207,7 @@ user_helpers1 = """
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_release: root.newloan_extension()
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1 
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -217,9 +227,9 @@ user_helpers1 = """
 
             MDFlatButton:
                 size_hint: None, None
-
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1
+                on_release: root.view_loan_foreclose()
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -240,7 +250,7 @@ user_helpers1 = """
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color:0.031, 0.463, 0.91, 1 
+                md_bg_color:0.043, 0.145, 0.278, 1 
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -265,7 +275,7 @@ user_helpers1 = """
             theme_text_color: 'Custom'
             text_color: 1,1,1,1
             pos_hint: {'center_x': 0.92, 'center_y': 0.1}
-            md_bg_color: 0.031, 0.463, 0.91, 1              
+            md_bg_color: 0.043, 0.145, 0.278, 1              
 <ViewProfileScreen>
     canvas.before:
         Color:
@@ -283,6 +293,7 @@ user_helpers1 = """
             title: "View Profile"
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.on_back_button_press()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         ScrollView:  # Add ScrollView here
             do_scroll_x: False
             BoxLayout:
@@ -293,7 +304,7 @@ user_helpers1 = """
                 height: self.minimum_height
 
                 MDRectangleFlatButton:
-                   
+
                     line_color:1,1,1,1
                     size_hint: None, None
                     size: dp(120), dp(120)
@@ -304,13 +315,13 @@ user_helpers1 = """
                         Ellipse:
                             size: self.size
                             pos: self.pos 
-          
+
                     Image:
                         id: selected_image1
                         source: "profile.png"
 
                     MDFloatLayout:
-        
+
                         size_hint:(None,None)
                         spacing:0
                         padding:0
@@ -324,7 +335,7 @@ user_helpers1 = """
                     text: 'Selected File: None'
                     size_hint_y: None
                     height: 30
-                 
+
                 MDLabel:
                     text: ' Customer ID '
                     color: 0, 0, 0, 1
@@ -361,7 +372,7 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         readonly: True
-               
+
                 MDLabel:
                     text: ' Full Name '
                     color: 0, 0, 0, 1
@@ -408,7 +419,7 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
-                 
+
                 MDLabel:
                     text: ' Mobile Number '
                     color: 0, 0, 0, 1
@@ -451,9 +462,9 @@ user_helpers1 = """
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
-                    
-                    
-                 
+
+
+
                 MDLabel:
                     text: ' Date Of Birth '
                     color: 0, 0, 0, 1
@@ -496,7 +507,7 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
-                
+
                 MDLabel:
                     text: ' Gender '
                     color: 0, 0, 0, 1
@@ -539,7 +550,7 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
-  
+
                 MDLabel:
                     text: ' Alternate email '
                     color: 0, 0, 0, 1
@@ -584,7 +595,7 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
- 
+
                 MDLabel:
                     text: ' Government ID1 '
                     color: 0, 0, 0, 1
@@ -664,7 +675,7 @@ user_helpers1 = """
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
                         readonly: True
-  
+
                 MDLabel:
                     text: ' Highest Qualification'
                     color: 0, 0, 0, 1
@@ -709,8 +720,8 @@ user_helpers1 = """
                         line_color_normal: [1, 1, 1, 1]  
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold" 
-      
-                  
+
+
                 MDLabel:
                     text: ' Street Name '
                     color: 0, 0, 0, 1
@@ -756,55 +767,9 @@ user_helpers1 = """
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
 
-                 
+
                 MDLabel:
                     text: ' City Name '
-                    color: 0, 0, 0, 1
-                    halign: 'left'
-                    size_hint_x: 1
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    bold: True
-
-                MDFloatLayout:
-                    size_hint: None, None
-                    size: dp(200), dp(40)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    size_hint_x: 1
-                    canvas.before:
-                        Color:
-                            rgba: 1, 1, 1, 1  # Set background color to white
-                        RoundedRectangle:
-                            pos: self.pos
-                            size: self.size
-                            radius: [10, 10, 10, 10]
-
-                        Color:
-                            rgba: 0, 0, 0, 1  # Set border color to black
-
-                        Line:
-                            rounded_rectangle: [self.x + 5, self.y + 0.9, self.width - 2, self.height - 0.5, 10, 10, 10, 10]
-                            width: 1  # Border line width
-
-                    MDFlatButton:
-                        text: "EDIT"
-                        pos_hint: {'center_x': 0.9, 'center_y': 0.5}
-                        theme_text_color: "Custom"
-                        text_color:6/255, 143/255, 236/255, 1
-                        font_name: "Roboto-Bold"
-
-                    MDTextField:
-                        id: text_input8
-                        size_hint: None, None
-                        size_hint_x: 0.91
-                        multiline: False
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                        line_color_normal: [1, 1, 1, 1]  
-                        line_color_focus: [1, 1, 1, 1]
-                        font_name: "Roboto-Bold"
-
-                
-                MDLabel:
-                    text: ' Zipcode '
                     color: 0, 0, 0, 1
                     halign: 'left'
                     size_hint_x: 1
@@ -848,7 +813,53 @@ user_helpers1 = """
                         line_color_focus: [1, 1, 1, 1]
                         font_name: "Roboto-Bold"
 
-                  
+
+                MDLabel:
+                    text: ' Zipcode '
+                    color: 0, 0, 0, 1
+                    halign: 'left'
+                    size_hint_x: 1
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    bold: True
+
+                MDFloatLayout:
+                    size_hint: None, None
+                    size: dp(200), dp(40)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    size_hint_x: 1
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set background color to white
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10, 10, 10, 10]
+
+                        Color:
+                            rgba: 0, 0, 0, 1  # Set border color to black
+
+                        Line:
+                            rounded_rectangle: [self.x + 5, self.y + 0.9, self.width - 2, self.height - 0.5, 10, 10, 10, 10]
+                            width: 1  # Border line width
+
+                    MDFlatButton:
+                        text: "EDIT"
+                        pos_hint: {'center_x': 0.9, 'center_y': 0.5}
+                        theme_text_color: "Custom"
+                        text_color:6/255, 143/255, 236/255, 1
+                        font_name: "Roboto-Bold"
+
+                    MDTextField:
+                        id: text_input10
+                        size_hint: None, None
+                        size_hint_x: 0.91
+                        multiline: False
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        line_color_normal: [1, 1, 1, 1]  
+                        line_color_focus: [1, 1, 1, 1]
+                        font_name: "Roboto-Bold"
+
+
                 MDLabel:
                     text: ' State Name '
                     color: 0, 0, 0, 1
@@ -885,7 +896,7 @@ user_helpers1 = """
                         font_name: "Roboto-Bold"
 
                     MDTextField:
-                        id: text_input10
+                        id: text_input110
                         size_hint: None, None
                         size_hint_x: 0.91
                         multiline: False
@@ -1418,7 +1429,30 @@ class LenderDashboard(Screen):
         self.manager.current = 'MainScreen'
 
     def profile(self):
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.permformance_profile(modal_view), 2)
+
+
+    def permformance_profile(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
+        modal_view.dismiss()
         sm = self.manager
 
         # Create a new instance of the LoginScreen
@@ -1429,48 +1463,290 @@ class LenderDashboard(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'ViewProfileScreen'
-
-    def view_loan_request(self):
-        # self.manager.current = 'ViewProfileScreen'
+    def lender_today_due(self):
         sm = self.manager
 
         # Create a new instance of the LoginScreen
-        profile_screen = ViewLoansRequest(name='ViewLoansRequest')
+        profile_screen = TodayDuesTD(name='TodayDuesTD')
 
         # Add the LoginScreen to the existing ScreenManager
         sm.add_widget(profile_screen)
 
         # Switch to the LoginScreen
+        sm.current = 'TodayDuesTD'
+
+    def view_loan_request(self):
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_loan_request_action(modal_view), 2)
+
+    def animate_loading_text(self, loading_label, modal_height):
+        # Define the animation to move the label vertically
+        anim = Animation(y=modal_height - loading_label.height, duration=1) + \
+               Animation(y=0, duration=5)
+        anim.bind(on_complete=lambda *args: self.animate_loading_text(loading_label,
+                                                                      modal_height))  # Bind to the completion event to repeat the animation
+        anim.start(loading_label)
+
+    def perform_loan_request_action(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
+
+        sm = self.manager
+        profile_screen = ViewLoansRequest(name='ViewLoansRequest')
+        sm.add_widget(profile_screen)
         sm.current = 'ViewLoansRequest'
 
     def view_loanscreen(self):
-        # self.manager.current = 'ViewProfileScreen'
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_view_loanscreen(modal_view), 2)
+
+    def perform_view_loanscreen(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
+
         sm = self.manager
-
-        # Create a new instance of the LoginScreen
-        profile_screen = ViewLoansScreen(name=' ViewLoansScreen')
-
-        # Add the LoginScreen to the existing ScreenManager
+        profile_screen = ViewLoansScreen(name='ViewLoansScreen')
         sm.add_widget(profile_screen)
-
-        # Switch to the LoginScreen
-        sm.current = ' ViewLoansScreen'
+        sm.current = 'ViewLoansScreen'
 
     def newloan_extension(self):
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_newloan_extension(modal_view), 2)
+
+    def perform_newloan_extension(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
+        modal_view.dismiss()
         sm = self.manager
 
         # Create a new instance of the LoginScreen
-        profile_screen = NewExtension(name=' NewExtension')
+        profile_screen = NewExtension(name='NewExtension')
 
         # Add the LoginScreen to the existing ScreenManager
         sm.add_widget(profile_screen)
 
         # Switch to the LoginScreen
-        sm.current = ' NewExtension'
+        sm.current = 'NewExtension'
+
+    def view_loan_foreclose(self):
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.performance_view_loan_foreclose(modal_view), 2)
+
+
+    def performance_view_loan_foreclose(self,modal_view):
+        modal_view.dismiss()
+        sm = self.manager
+
+        # Create a new instance of the LoginScreen
+        profile_screen = DashboardScreenLF(name='DashboardScreenLF')
+
+        # Add the LoginScreen to the existing ScreenManager
+        sm.add_widget(profile_screen)
+
+        # Switch to the LoginScreen
+        sm.current = 'DashboardScreenLF'
+
+    def go_to_wallet(self):
+        modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
+
+        # Create MDLabel with white text color, increased font size, and bold text
+        loading_label = MDLabel(text="Loading...", halign="center", valign="bottom",
+                                theme_text_color="Custom", text_color=[1, 1, 1, 1],
+                                font_size="25sp", bold=True)
+
+        # Set initial y-position off-screen
+        loading_label.y = -loading_label.height
+
+        modal_view.add_widget(loading_label)
+        modal_view.open()
+
+        # Perform the animation
+        self.animate_loading_text(loading_label, modal_view.height)
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_wallet(modal_view), 2)
+
+    def perform_wallet(self, modal_view):
+        from lender_wallet import WalletScreen
+
+        modal_view.dismiss()
+        # Get the existing ScreenManager
+        sm = self.manager
+
+        # Create a new instance of the LoginScreen
+        login_screen = WalletScreen(name='WalletScreen')
+
+        # Add the LoginScreen to the existing ScreenManager
+        sm.add_widget(login_screen)
+
+        # Switch to the LoginScreen
+        sm.current = 'WalletScreen'
 
 
 class ViewProfileScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        email = self.get_email()
+        data = self.get_table()
+        customer = []
+        email1 = []
+        name = []
+        mobile = []
+        date_of_birth = []
+        gender = []
+        alternate_email = []
+        government_type1 = []
+        government_type2 = []
+        highest_qualification = []
+        street_name = []
+        city = []
+        zipcode = []
+        state = []
+        country =[]
+        loan_type1 = []
+        investment = []
+        lending_period = []
+        user_type = []
+        acholder_name = []
+        account_type = []
+        account_number = []
+        bank_name = []
+        bank_id = []
+        branch_name = []
+        for row in data:
+            customer.append(row['customer_id'])
+            email1.append(row['email_user'])
+            name.append(row['full_name'])
+            mobile.append(row['mobile'])
+            date_of_birth.append(row['date_of_birth'])
+            gender.append(row['gender'])
+            alternate_email.append(row['another_email'])
+            government_type1.append(row['aadhaar_no'])
+            government_type2.append(row['pan_number'])
+            highest_qualification.append(row['qualification'])
+            street_name.append(row['street'])
+            city.append(row['city'])
+            zipcode.append(row['pincode'])
+            state.append(row['state'])
+            country.append(row['country'])
+            loan_type1.append(row['loan_type'])
+            investment.append(row['investment'])
+            lending_period.append(row['lending_period'])
+            user_type.append(row['usertype'])
+            acholder_name.append(row['account_name'])
+            account_type.append(row['account_type'])
+            account_number.append(row['account_number'])
+            bank_name.append(row['bank_name'])
+            bank_id.append(row['bank_id'])
+            branch_name.append(row['account_bank_branch'])
+
+
+        if email in email1:
+            index = email1.index(email)
+            self.ids.customer_id.text = str(customer[index])
+            self.ids.username.text = str(name[index])
+            self.ids.text_input1.text = str(mobile[index])
+            self.ids.text_input2.text = str(date_of_birth[index])
+            self.ids.text_input3.text = str(gender[index])
+            self.ids.text_input4.text = str(alternate_email[index])
+            self.ids.text_input5.text = str(government_type1[index])
+            self.ids.text_input6.text = str(government_type2[index])
+            self.ids.text_input7.text = str(highest_qualification[index])
+            self.ids.text_input8.text = str(street_name[index])
+            self.ids.text_input9.text = str(city[index])
+            self.ids.text_input10.text = str(zipcode[index])
+            self.ids.text_input110.text = str(state[index])
+            self.ids.text_input11.text = str(country[index])
+            self.ids.text_input12.text = str(loan_type1[index])
+            self.ids.text_input13.text = str(investment[index])
+            self.ids.text_input14.text = str(lending_period[index])
+            self.ids.text_input15.text = str(user_type[index])
+            self.ids.text_input16.text = str(acholder_name[index])
+            self.ids.text_input17.text = str(account_type[index])
+            self.ids.text_input18.text = str(account_number[index])
+            self.ids.text_input19.text = str(bank_name[index])
+            self.ids.text_input20.text = str(bank_id[index])
+            self.ids.text_input21.text = str(branch_name[index])
+
+        else:
+            print("email not Found")
+
+    def get_email(self):
+        # Make a call to the Anvil server function
+        # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
+        return anvil.server.call('another_method')
+    def get_table(self):
+        # Make a call to the Anvil server function
+        # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
+        return anvil.server.call('profile')
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1")
 

@@ -25,9 +25,11 @@ from kivy.clock import mainthread
 from datetime import datetime
 from kivymd.uix.snackbar import Snackbar
 import anvil.server
+from kivy.uix.modalview import ModalView
+from kivymd.uix.spinner import MDSpinner
+from kivy.clock import Clock
 
-anvil.server.connect("server_ANJQTKQ62KGHGX2XHC43NVOG-6JH2LHL646DIRMSE")
-
+anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
 
 from lender_dashboard import LenderDashboard
 
@@ -76,6 +78,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: root.go_to_dashboard()]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
 
 
@@ -118,7 +121,7 @@ KV = '''
                 id: username
                 hint_text: 'Enter full name'
                 multiline: False
-                helper_text: 'Enter valid name'
+                helper_text: 'Enter Your name'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
                 height: self.minimum_height
@@ -158,18 +161,12 @@ KV = '''
 
                     font_name: "Roboto-Bold"
                     hint_text_color: 0, 0, 0, 1
-                MDIconButton:
-
-                    icon: 'calendar-check'
-                    on_press: root.show_date_picker()
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
 
 
 
             MDRectangleFlatButton:
                 text: 'Next'
-                md_bg_color: 0.031, 0.463, 0.91, 1
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 theme_text_color: 'Custom'
                 text_color: 1, 1, 1, 1
                 size_hint: 1, None
@@ -184,9 +181,10 @@ KV = '''
         title: "P2P LENDING"
         elevation: 2
         pos_hint: {'top': 1}
-        left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen1')]]
-        right_action_items: [['home', lambda x: root.go_to_dashboard]]
+        left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen')]]
+        right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -224,7 +222,7 @@ KV = '''
                 id: mobile_number
                 hint_text: 'Enter mobile number'
                 multiline: False
-                helper_text: 'Enter valid number'
+                helper_text: 'Enter Your number'
                 helper_text_mode: 'on_focus'
                 font_name: "Roboto-Bold"
                 hint_text_color: 0,0,0, 1
@@ -235,7 +233,7 @@ KV = '''
                 id: altername_email
                 hint_text: 'Enter your alternate email'
                 multiline: False
-                helper_text: 'Enter your valid email_id'
+                helper_text: 'Enter your Your email_id'
                 helper_text_mode: 'on_focus'
                 hint_text_color: 0, 0, 0, 1
                 font_name: "Roboto-Bold"
@@ -267,7 +265,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.add_data(mobile_number.text, altername_email.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -282,6 +280,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen1')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -313,7 +312,7 @@ KV = '''
                 id: aadhar_number
                 hint_text: 'Enter Government ID1 '
                 multiline: False
-                helper_text: 'Enter valid number'
+                helper_text: 'Enter Your number'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
                 height: self.minimum_height
@@ -372,7 +371,7 @@ KV = '''
                 id: pan_number
                 hint_text: 'Enter Government ID2 '
                 multiline: False
-                helper_text: 'Enter valid number'
+                helper_text: 'Enter Your number'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
                 height: self.minimum_height
@@ -428,7 +427,7 @@ KV = '''
             MDRectangleFlatButton:
                 text: "Next"
                 on_release: root.add_data(aadhar_number.text, pan_number.text)
-                md_bg_color: 0.031, 0.463, 0.91, 1
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 pos_hint: {'right': 1, 'y': 0.5}
                 text_color: 1, 1, 1, 1
                 size_hint: 1, None
@@ -443,6 +442,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen2')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -503,7 +503,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_press: root.next_pressed(spinner_id.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -521,6 +521,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -610,7 +611,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.go_to_lender_screen4()
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -625,6 +626,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -750,7 +752,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.go_to_lender_screen4()
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -765,6 +767,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title"
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -880,7 +883,7 @@ KV = '''
                 valign: 'middle'  # Align the label text vertically in the center
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             MDLabel:
-                text: "Upload B.tech/B.E certificate"
+                text: "Upload Bachelors certificate"
                 halign: 'center'
                 bold: True
 
@@ -937,7 +940,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.go_to_lender_screen4()
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -952,6 +955,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1072,7 +1076,7 @@ KV = '''
                 valign: 'middle'  # Align the label text vertically in the center
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             MDLabel:
-                text: "Upload B.tech/B.E Certificate"
+                text: "Upload Bachelors certificate"
                 halign: 'center'
                 bold: True
 
@@ -1178,7 +1182,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.go_to_lender_screen4()
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1193,6 +1197,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1310,7 +1315,7 @@ KV = '''
                 valign: 'middle'  # Align the label text vertically in the center
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             MDLabel:
-                text: "Upload Btech/B.E Certificate"
+                text: "Upload Bachelors certificate"
                 halign: 'center'
                 bold: True
 
@@ -1459,7 +1464,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.go_to_lender_screen4()
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1473,6 +1478,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
     MDBoxLayout:
         orientation: 'vertical'
         spacing: dp(30)
@@ -1535,7 +1541,7 @@ KV = '''
                 id: street_address
                 hint_text: 'Enter Street Name'
                 multiline: False
-                helper_text: 'Enter valid address'
+                helper_text: 'Enter Your address'
                 helper_text_mode: 'on_focus'
 
             GridLayout:
@@ -1547,7 +1553,7 @@ KV = '''
                 MDRectangleFlatButton:
                     text: "Next"
                     on_release: root.add_data(street_address.text, city.text, zip_code.text, state.text, country.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1561,6 +1567,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen4')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1640,7 +1647,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_press: root.next_pressed(spinner_id.text, investment.text, spinner2.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1654,6 +1661,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen5')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1728,7 +1736,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(business_name.text,business_location.text,business_address.text,branch_name.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1744,6 +1752,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm1')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1823,7 +1832,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(spin.text,nearest_location.text,spinner_id.text,year_of_estd.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1839,6 +1848,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm2')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -1952,7 +1962,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(spinner_id.text,last_six_months_turnover.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -1967,6 +1977,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2034,7 +2045,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(director_name.text,director_mobile_number.text,din.text,cin.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2046,9 +2057,10 @@ KV = '''
         title: "P2P LENDING"
         elevation: 2
         pos_hint: {'top': 1}
-        left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm4')]]
+        left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2072,7 +2084,7 @@ KV = '''
 
 
             MDLabel:
-                text: 'Step-5'
+                text: 'Step-4'
                 halign: 'center'
                 bold: True
 
@@ -2148,7 +2160,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(reg_office_address.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2165,6 +2177,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreen5')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2252,7 +2265,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(spinner1.text, company_name.text, spinner2.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2266,6 +2279,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenIndividualForm1')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2408,7 +2422,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(annual_salary.text, designation.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2423,6 +2437,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenIndividualForm2')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2498,7 +2513,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(company_address.text, company_pin_code.text, company_country.text, landmark.text, business_phone_number.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2516,6 +2531,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenIndividualForm3')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2547,7 +2563,7 @@ KV = '''
                 id: account_holder_name
                 hint_text: 'Enter account holder name '
                 multiline: False
-                helper_text: 'Enter valid account holder name'
+                helper_text: 'Enter Your account holder name'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2572,7 +2588,7 @@ KV = '''
                 id: account_number
                 hint_text: 'Enter account number '
                 multiline: False
-                helper_text: 'Enter valid account number'
+                helper_text: 'Enter Your account number'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2593,7 +2609,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(account_holder_name.text, spinner_id.text, account_number.text, bank_name.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2608,6 +2624,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenIndividualBankForm1')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2638,7 +2655,7 @@ KV = '''
                 id: ifsc_code
                 hint_text: 'Enter Bank ID '
                 multiline: False
-                helper_text: 'Enter valid ifsc code'
+                helper_text: 'Enter Your ifsc code'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2659,7 +2676,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Submit"
                     on_release: root.go_to_lender_dashboard(ifsc_code.text, branch_name.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2677,6 +2694,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalForm5')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -2708,7 +2726,7 @@ KV = '''
                 id: account_holder_name
                 hint_text: 'Enter account holder name '
                 multiline: False
-                helper_text: 'Enter valid account holder name'
+                helper_text: 'Enter Your account holder name'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2734,7 +2752,7 @@ KV = '''
                 id: account_number
                 hint_text: 'Enter account number '
                 multiline: False
-                helper_text: 'Enter valid account number'
+                helper_text: 'Enter Your account number'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2753,7 +2771,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Next"
                     on_release: root.add_data(account_holder_name.text, spinner_id.text, account_number.text, bank_name.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2768,6 +2786,7 @@ KV = '''
         left_action_items: [['arrow-left', lambda x: setattr(app.root, 'current', 'LenderScreenInstitutionalBankForm1')]]
         right_action_items: [['home', lambda x: root.go_to_dashboard()]]
         title_align: 'center'  # Center-align the title
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
 
     MDBoxLayout:
@@ -2801,7 +2820,7 @@ KV = '''
                 id: ifsc_code
                 hint_text: 'Enter Bank ID '
                 multiline: False
-                helper_text: 'Enter valid ifsc code'
+                helper_text: 'Enter Your ifsc code'
                 helper_text_mode: 'on_focus'
                 size_hint_y: None
 
@@ -2821,7 +2840,7 @@ KV = '''
                 MDRaisedButton:
                     text: "Submit"
                     on_release: root.go_to_lender_dashboard(ifsc_code.text, branch_name.text)
-                    md_bg_color: 0.031, 0.463, 0.91, 1
+                    md_bg_color: 0.043, 0.145, 0.278, 1
                     pos_hint: {'right': 1, 'y': 0.5}
                     text_color: 1, 1, 1, 1
                     size_hint: 1, None
@@ -2842,22 +2861,17 @@ class LenderScreen(Screen):
         data = anvil.server.call('another_method')
         return data
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.date_picker = MDDatePicker()
-        self.date_picker.bind(on_save=self.on_date_selected)
-
-    def show_date_picker(self):
-        date_dialog = MDDatePicker()
-        date_dialog.bind(on_save=self.on_date_selected)
-        date_dialog.open()
-
-    def on_date_selected(self, instance, value, date_range):
-        # This method will be called when the user selects a date
-        print(f"Selected date: {value}")
-        self.ids.date_textfield.text = f'{value.year}-{value.month}-{value.day}'
-
     def add_data(self, name, gender, date):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(lambda dt: self.perform_data_addition_action(name, gender, date, modal_view), 2)
+
+    def perform_data_addition_action(self, name, gender, date, modal_view):
+        modal_view.dismiss()
 
         if not name.strip():
             self.show_snackbar("Please enter your full name.")
@@ -2874,7 +2888,6 @@ class LenderScreen(Screen):
         row_id_list = []
         email_list = []
         status = []
-        b = 'lender'
 
         for row in rows:
             row_id_list.append(row[0])
@@ -2883,8 +2896,8 @@ class LenderScreen(Screen):
         if 'logged' in status:
             log_index = status.index('logged')
             cursor.execute(
-                "UPDATE fin_registration_table SET name = ?, gender = ?, date_of_birth = ?, user_type = ? WHERE customer_id = ?",
-                (name, gender, date, b, row_id_list[log_index]))
+                "UPDATE fin_registration_table SET name = ?, gender = ?, date_of_birth = ? WHERE customer_id = ?",
+                (name, gender, date, row_id_list[log_index]))
             conn.commit()
         else:
             # Handle the case where the user is not logged in
@@ -2895,14 +2908,12 @@ class LenderScreen(Screen):
         for i in data:
             id_list.append(i['email_user'])
 
-        date_object = datetime.strptime(date, '%Y-%m-%d')
         user_email = self.get_email()
         if user_email in id_list:
             index = id_list.index(user_email)
             data[index]['full_name'] = name
             data[index]['gender'] = gender
-            data[index]['date_of_birth'] = date_object.date()
-            data[index]['usertype'] = b
+            data[index]['date_of_birth'] = date
         else:
             print("email not there")
 
@@ -2914,7 +2925,6 @@ class LenderScreen(Screen):
 
     def show_snackbar(self, text):
         Snackbar(text=text, pos_hint={'top': 1}, md_bg_color=[1, 0, 0, 1]).open()
-
 
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
@@ -2954,6 +2964,16 @@ class LenderScreen1(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, mobile_number, alternate_email):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(lambda dt: self.perform_data_addition_action(mobile_number, alternate_email, modal_view), 2)
+
+    def perform_data_addition_action(self, mobile_number, alternate_email, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -2966,8 +2986,9 @@ class LenderScreen1(Screen):
         if 'logged' in status:
             log_index = status.index('logged')
 
-            cursor.execute("UPDATE fin_registration_table SET mobile_number = ?, alternate_email = ? WHERE customer_id = ?",
-                           (mobile_number, alternate_email, row_id_list[log_index]))
+            cursor.execute(
+                "UPDATE fin_registration_table SET mobile_number = ?, alternate_email = ? WHERE customer_id = ?",
+                (mobile_number, alternate_email, row_id_list[log_index]))
             conn.commit()
         else:
             # Handle the case where the user is not logged in
@@ -3013,6 +3034,9 @@ class LenderScreen1(Screen):
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'LenderScreen'
+
+    def go_to_dashboard(self):
+        self.manager.current = 'DashScreen'
 
 
 class LenderScreen2(Screen):
@@ -3108,6 +3132,16 @@ class LenderScreen2(Screen):
     # Repeat similar methods for file manager 2...
 
     def add_data(self, aadhar_number, pan_number):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(lambda dt: self.perform_data_addition_action(aadhar_number, pan_number, modal_view), 2)
+
+    def perform_data_addition_action(self, aadhar_number, pan_number, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -3163,7 +3197,6 @@ class LenderScreen2(Screen):
         self.manager.current = 'LenderScreen1'
 
 
-
 class LenderScreen3(Screen):
     def get_email(self):
         data = anvil.server.call('another_method')
@@ -3171,7 +3204,18 @@ class LenderScreen3(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def next_pressed(self, id):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(lambda dt: self.perform_data_addition_action(id, modal_view), 2)
+
+    def perform_data_addition_action(self, id, modal_view):
+        modal_view.dismiss()
         if id == '10th class':
             LenderScreen_Edu_10th()
             sm = self.manager
@@ -3261,6 +3305,7 @@ class LenderScreen_Edu_10th(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -3336,6 +3381,7 @@ class LenderScreen_Edu_10th(Screen):
             self.ids.upload_label1.text = 'Upload Successfully'
         else:
             print('User is not logged in.')
+
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
@@ -3356,6 +3402,18 @@ class LenderScreen_Edu_10th(Screen):
         self.manager.current = 'LenderScreen3'
 
     def go_to_lender_screen4(self):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_loan_request_action10th(modal_view), 2)
+
+    def perform_loan_request_action10th(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
         # Get the existing ScreenManager
         sm = self.manager
 
@@ -3477,6 +3535,7 @@ class LenderScreen_Edu_Intermediate(Screen):
             self.ids.upload_label2.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
@@ -3497,6 +3556,18 @@ class LenderScreen_Edu_Intermediate(Screen):
         self.manager.current = 'LenderScreen3'
 
     def go_to_lender_screen4(self):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_loan_request_action11th(modal_view), 2)
+
+    def perform_loan_request_action11th(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
         # Get the existing ScreenManager
         sm = self.manager
 
@@ -3517,6 +3588,7 @@ class LenderScreen_Edu_Bachelors(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -3614,6 +3686,7 @@ class LenderScreen_Edu_Bachelors(Screen):
             self.ids.upload_label1.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_2(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -3631,6 +3704,7 @@ class LenderScreen_Edu_Bachelors(Screen):
             self.ids.upload_label2.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_3(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -3648,6 +3722,7 @@ class LenderScreen_Edu_Bachelors(Screen):
             self.ids.upload_label3.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
@@ -3668,6 +3743,18 @@ class LenderScreen_Edu_Bachelors(Screen):
         self.manager.current = 'LenderScreen3'
 
     def go_to_lender_screen4(self):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_loan_request_action_bachelors(modal_view), 2)
+
+    def perform_loan_request_action_bachelors(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
         # Get the existing ScreenManager
         sm = self.manager
 
@@ -3688,6 +3775,7 @@ class LenderScreen_Edu_Masters(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -3796,6 +3884,7 @@ class LenderScreen_Edu_Masters(Screen):
             self.ids.upload_label1.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_2(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -3813,6 +3902,7 @@ class LenderScreen_Edu_Masters(Screen):
             self.ids.upload_label2.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_3(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -3847,6 +3937,7 @@ class LenderScreen_Edu_Masters(Screen):
             self.ids.upload_label4.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
@@ -3867,6 +3958,18 @@ class LenderScreen_Edu_Masters(Screen):
         self.manager.current = 'LenderScreen3'
 
     def go_to_lender_screen4(self):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_masters_action(modal_view), 2)
+
+    def perform_masters_action(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
         # Get the existing ScreenManager
         sm = self.manager
 
@@ -3887,6 +3990,7 @@ class LenderScreen_Edu_PHD(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -4001,6 +4105,7 @@ class LenderScreen_Edu_PHD(Screen):
             self.ids.upload_label1.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_2(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -4018,6 +4123,7 @@ class LenderScreen_Edu_PHD(Screen):
             self.ids.upload_label2.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_3(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -4035,6 +4141,7 @@ class LenderScreen_Edu_PHD(Screen):
             self.ids.upload_label3.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_4(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -4052,6 +4159,7 @@ class LenderScreen_Edu_PHD(Screen):
             self.ids.upload_label4.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def update_data_with_file_5(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -4069,6 +4177,7 @@ class LenderScreen_Edu_PHD(Screen):
             self.ids.upload_label5.text = 'Upload Successfully'
         except ValueError:
             print('User is not logged in.')
+
     def go_to_dashboard(self):
         self.manager.current = 'DashScreen'
 
@@ -4089,6 +4198,18 @@ class LenderScreen_Edu_PHD(Screen):
         self.manager.current = 'LenderScreen3'
 
     def go_to_lender_screen4(self):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., fetching loan requests)
+        # You can replace the sleep with your actual logic
+        Clock.schedule_once(lambda dt: self.perform_phd_action(modal_view), 2)
+
+    def perform_phd_action(self, modal_view):
+        # Close the modal view after performing the action
+        modal_view.dismiss()
         # Get the existing ScreenManager
         sm = self.manager
 
@@ -4109,6 +4230,17 @@ class LenderScreen4(Screen):
         return data
 
     def add_data(self, street, city, zip_code, state, country):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(street, city, zip_code, state, country, modal_view), 2)
+
+    def perform_data_addition_action4(self, street, city, zip_code, state, country, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4184,6 +4316,17 @@ class LenderScreen5(Screen):
         return anvil.server.call('profile')
 
     def next_pressed(self, id, investment, period):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(id, investment, period, modal_view), 2)
+
+    def perform_data_addition_action4(self, id, investment, period, modal_view):
+        modal_view.dismiss()
         if id == 'Individual':
             # self.manager.current = 'LenderScreenIndividualForm1'
             sm = self.manager
@@ -4267,6 +4410,19 @@ class LenderScreenInstitutionalForm1(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, business_name, business_location, business_address, business_branch_name):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(business_name, business_location, business_address,
+                                                          business_branch_name, modal_view), 2)
+
+    def perform_data_addition_action4(self, business_name, business_location, business_address, business_branch_name,
+                                      modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4336,6 +4492,19 @@ class LenderScreenInstitutionalForm2(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, business_type, nearest_location, no_of_employees_working, year_of_estd):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(business_type, nearest_location, no_of_employees_working,
+                                                          year_of_estd, modal_view), 2)
+
+    def perform_data_addition_action4(self, business_type, nearest_location, no_of_employees_working, year_of_estd,
+                                      modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4403,6 +4572,7 @@ class LenderScreenInstitutionalForm3(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -4477,6 +4647,17 @@ class LenderScreenInstitutionalForm3(Screen):
         self.ids.upload_label1.text = 'Upload Successfully'
 
     def add_data(self, industry_type, last_six_months_turnover):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(industry_type, last_six_months_turnover, modal_view), 2)
+
+    def perform_data_addition_action4(self, industry_type, last_six_months_turnover, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4509,10 +4690,10 @@ class LenderScreenInstitutionalForm3(Screen):
             print('email not found')
         # self.manager.current = 'LenderScreenInstitutionalForm4'
         sm = self.manager
-        lender_screen = LenderScreenInstitutionalForm4(name='LenderScreenInstitutionalForm4')
+        lender_screen = LenderScreenInstitutionalForm5(name='LenderScreenInstitutionalForm5')
         sm.add_widget(lender_screen)
         sm.transition.direction = 'left'  # Set the transition direction explicitly
-        sm.current = 'LenderScreenInstitutionalForm4'
+        sm.current = 'LenderScreenInstitutionalForm5'
 
     def on_last_six_months_turnover_touch_down(self):
         # Change keyboard mode to numeric when the mobile number text input is touched
@@ -4548,6 +4729,18 @@ class LenderScreenInstitutionalForm4(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, director_name, director_mobile_number, DIN, CIN):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(director_name, director_mobile_number, DIN, CIN, modal_view),
+            2)
+
+    def perform_data_addition_action4(self, director_name, director_mobile_number, DIN, CIN, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4619,6 +4812,7 @@ class LenderScreenInstitutionalForm5(Screen):
 
     def profile(self):
         return anvil.server.call('profile')
+
     def check_and_open_file_manager1(self):
         self.check_and_open_file_manager("upload_icon1", "upload_label1", "selected_file_label1", "selected_image1",
                                          "image_label1")
@@ -4694,6 +4888,18 @@ class LenderScreenInstitutionalForm5(Screen):
         self.ids.upload_label1.text = 'Upload Successfully'
 
     def add_data(self, registered_office_address):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action(registered_office_address, modal_view),
+            2)
+
+    def perform_data_addition_action(self, registered_office_address, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4748,7 +4954,7 @@ class LenderScreenInstitutionalForm5(Screen):
 
     def go_back(self):
         self.manager.transition = SlideTransition(direction='right')
-        self.manager.current = 'LenderScreenInstitutionalForm4'
+        self.manager.current = 'LenderScreenInstitutionalForm3'
 
 
 class LenderScreenIndividualForm1(Screen):
@@ -4757,10 +4963,22 @@ class LenderScreenIndividualForm1(Screen):
         data = anvil.server.call('another_method')
         return data
 
+
     def profile(self):
         return anvil.server.call('profile')
 
     def add_data(self, employeent_type, company_name, organization):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(employeent_type, company_name, organization, modal_view), 2)
+
+    def perform_data_addition_action4(self, employeent_type, company_name, organization, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -4913,6 +5131,7 @@ class LenderScreenIndividualForm2(Screen):
         else:
             # Handle the case where the user is not logged in
             print("User is not logged in.")
+
     def update_data_with_file_2(self, file_path):
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
@@ -4929,6 +5148,17 @@ class LenderScreenIndividualForm2(Screen):
         self.ids.upload_label2.text = 'Upload Successfully'
 
     def add_data(self, annual_salary, designation):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(annual_salary, designation, modal_view), 2)
+
+    def perform_data_addition_action4(self, annual_salary, designation, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -5004,6 +5234,19 @@ class LenderScreenIndividualForm3(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, company_address, company_pincode, company_country, landmark, business_number):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(company_address, company_pincode, company_country, landmark,
+                                                          business_number, modal_view), 2)
+
+    def perform_data_addition_action4(self, company_address, company_pincode, company_country, landmark,
+                                      business_number, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -5086,6 +5329,18 @@ class LenderScreenIndividualBankForm1(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, account_holder_name, account_type, account_number, bank_name):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(account_holder_name, account_type, account_number, bank_name,
+                                                          modal_view), 2)
+
+    def perform_data_addition_action4(self, account_holder_name, account_type, account_number, bank_name, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -5159,11 +5414,24 @@ class LenderScreenIndividualBankForm2(Screen):
         return anvil.server.call('profile')
 
     def go_to_lender_dashboard(self, bank_id, branch_name):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(bank_id, branch_name,
+                                                          modal_view), 2)
+
+    def perform_data_addition_action4(self, bank_id, branch_name, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
         status = []
         email_list = []
+        b = 'lender'
         for row in rows:
             row_id_list.append(row[0])
             status.append(row[-1])
@@ -5171,12 +5439,14 @@ class LenderScreenIndividualBankForm2(Screen):
         if 'logged' in status:
             log_index = status.index('logged')
 
-            cursor.execute("UPDATE fin_registration_table SET bank_id = ?, branch_name = ? WHERE customer_id = ?",
-                           (bank_id, branch_name, row_id_list[log_index]))
+            cursor.execute(
+                "UPDATE fin_registration_table SET bank_id = ?, branch_name = ?, user_type = ? WHERE customer_id = ?",
+                (bank_id, branch_name, b, row_id_list[log_index]))
             conn.commit()
         else:
             # Handle the case where the user is not logged in
             print("User is not logged in.")
+
         data = self.profile()
         id_list = []
         for i in data:
@@ -5186,6 +5456,8 @@ class LenderScreenIndividualBankForm2(Screen):
             index = id_list.index(user_email)
             data[index]['bank_id'] = bank_id
             data[index]['account_bank_branch'] = branch_name
+            data[index]['usertype'] = b
+            data[index]['registration_approve'] = True
         else:
             print('email not fond')
 
@@ -5231,6 +5503,18 @@ class LenderScreenInstitutionalBankForm1(Screen):
         return anvil.server.call('profile')
 
     def add_data(self, account_holder_name, account_type, account_number, bank_name):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(account_holder_name, account_type, account_number, bank_name,
+                                                          modal_view), 2)
+
+    def perform_data_addition_action4(self, account_holder_name, account_type, account_number, bank_name, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
@@ -5300,11 +5584,24 @@ class LenderScreenInstitutionalBankForm2(Screen):
         return anvil.server.call('profile')
 
     def go_to_lender_dashboard(self, bank_id, branch_name):
+        modal_view = ModalView(size_hint=(None, None), size=(100, 100), background_color=[0, 0, 0, 0])
+        spinner = MDSpinner()
+        modal_view.add_widget(spinner)
+        modal_view.open()
+
+        # Perform the actual action (e.g., adding data)
+        Clock.schedule_once(
+            lambda dt: self.perform_data_addition_action4(bank_id, branch_name,
+                                                          modal_view), 2)
+
+    def perform_data_addition_action4(self, bank_id, branch_name, modal_view):
+        modal_view.dismiss()
         cursor.execute('select * from fin_users')
         rows = cursor.fetchall()
         row_id_list = []
         status = []
         email_list = []
+        b = 'lender'
         for row in rows:
             row_id_list.append(row[0])
             status.append(row[-1])
@@ -5312,8 +5609,9 @@ class LenderScreenInstitutionalBankForm2(Screen):
         if 'logged' in status:
             log_index = status.index('logged')
 
-            cursor.execute("UPDATE fin_registration_table SET bank_id = ?, branch_name = ? WHERE customer_id = ?",
-                           (bank_id, branch_name, row_id_list[log_index]))
+            cursor.execute(
+                "UPDATE fin_registration_table SET bank_id = ?, branch_name = ?, user_type = ? WHERE customer_id = ?",
+                (bank_id, branch_name, b, row_id_list[log_index]))
             conn.commit()
         else:
             # Handle the case where the user is not logged in
@@ -5328,6 +5626,8 @@ class LenderScreenInstitutionalBankForm2(Screen):
             index = id_list.index(user_email)
             data[index]['bank_id'] = bank_id
             data[index]['account_bank_branch'] = branch_name
+            data[index]['usertype'] = b
+            data[index]['registration_approve'] = True
         else:
             print('email not fond')
         sm = self.manager

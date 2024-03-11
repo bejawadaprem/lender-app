@@ -3,15 +3,11 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, SlideTransition
-
 from homepage import MainScreen
 import anvil.server
-anvil.server.connect("server_ANJQTKQ62KGHGX2XHC43NVOG-6JH2LHL646DIRMSE")
-
-
+anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
 class MyApp(MDApp):
     def build(self):
-
         sm = ScreenManager(transition=SlideTransition())
         main_screen = MainScreen(name='MainScreen')
 
@@ -33,6 +29,7 @@ class MyApp(MDApp):
             self.go_back()
             return True
         return False
+
 
     def on_keyboard(self, window, key, *args):
         if key == 27:  # Key code for the 'Escape' key

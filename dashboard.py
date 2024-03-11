@@ -10,7 +10,7 @@ import sqlite3
 
 from borrowerlanding import BorrowerLanding
 from lender_landing import LenderLanding
-
+import anvil
 KV = """
 
 
@@ -66,7 +66,7 @@ KV = """
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
         theme_text_color: "Custom"
         text_color:1,1,1,1
-        md_bg_color:0.302, 0.604, 0.929 ,1   
+        md_bg_color:0.043, 0.145, 0.278, 1   
         font_name: "Roboto-Bold"
         font_size:dp(15)
 
@@ -80,7 +80,7 @@ KV = """
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         theme_text_color: "Custom"
         text_color: 1,1,1,1
-        md_bg_color:0.031, 0.463, 0.91, 1       
+        md_bg_color:0.043, 0.145, 0.278, 1      
 
         font_size:dp(15)
 """
@@ -89,6 +89,12 @@ KV = """
 class DashScreen(Screen):
     Builder.load_string(KV)
 
+    def get_email(self):
+        data = anvil.server.call('another_method')
+        return data
+
+    def profile(self):
+        return anvil.server.call('profile')
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.on_pre_enter()
@@ -98,25 +104,18 @@ class DashScreen(Screen):
 
     def on_pre_enter(self):
         # Connect to the SQLite database
-        connection = sqlite3.connect("fin_user_profile.db")
-        cursor = connection.cursor()
+        profile = self.profile()
+        log_email = self.get_email()
 
-        cursor.execute('select * from fin_users')
-        rows = cursor.fetchall()
-        row_id_list = []
-        status = []
+        email_user = []
         name_list = []
-
-        for row in rows:
-            row_id_list.append(row[0])
-            status.append(row[-1])
-            name_list.append(row[1])
-
-        connection.close()
+        for i in profile:
+            email_user.append(i['email_user'])
+            name_list.append(i['full_name'])
 
         # Check if 'logged' is in the status list
-        if 'logged' in status:
-            log_index = status.index('logged')
+        if log_email in email_user:
+            log_index = email_user.index(log_email)
             self.ids.username.text = name_list[log_index]
         else:
             # Handle the case when 'logged' is not in the status list

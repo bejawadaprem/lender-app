@@ -90,7 +90,7 @@ KV = """
             size_hint: 1, None
 
             MDRaisedButton:
-                md_bg_color: 0.031, 0.463, 0.91, 1
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 theme_text_color: 'Custom'
                 text_color: 1, 1, 1, 1
                 size_hint: 1, None
@@ -128,7 +128,7 @@ KV = """
             MDRaisedButton:
                 text: "Login"
                 on_release: root.go_to_dashboard()
-                md_bg_color: 0.031, 0.463, 0.91, 1
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 theme_text_color: 'Custom'
                 text_color: 1, 1, 1, 1
                 size_hint: 1, None
@@ -138,7 +138,7 @@ KV = """
             MDRaisedButton:
                 text: "Sign Up"
                 on_release: root.go_to_signup()
-                md_bg_color: 0.031, 0.463, 0.91, 1
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 pos_hint: {'right': 1, 'y': 0.5}
                 size_hint: 1, None
                 height: "50dp"
