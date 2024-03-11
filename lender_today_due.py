@@ -23,6 +23,7 @@ lender_today_due = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:

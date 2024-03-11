@@ -1,5 +1,6 @@
 import anvil.server
 from kivy.clock import Clock
+from kivy.properties import ObjectProperty
 from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
@@ -11,6 +12,7 @@ from kivy.uix.screenmanager import Screen, SlideTransition
 from kivymd.uix.list import *
 from kivy.animation import Animation
 from kivymd.uix.label import MDLabel
+
 anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
 
 view_loans = '''
@@ -40,7 +42,7 @@ view_loans = '''
         height: self.minimum_height
         width: self.minimum_width
         size_hint_x: None
-        
+
         MDFlatButton:
             size_hint: None, None
 
@@ -132,7 +134,7 @@ view_loans = '''
                     text_color:1,1,1,1
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-        
+
         MDFlatButton:
             size_hint: None, None
             md_bg_color: 0.043, 0.145, 0.278, 1
@@ -182,7 +184,7 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
+
             MDList:
                 id: container1
 
@@ -196,7 +198,7 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
+
             MDList:
                 id: container2
 
@@ -210,7 +212,7 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
+
             MDList:
                 id: container3
 
@@ -224,11 +226,12 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
+
             MDList:
                 id: container4
 
 <ViewUnderProcessLoansScreen>
+    container: container5
     BoxLayout:
         orientation: 'vertical'
         MDTopAppBar:
@@ -238,7 +241,6 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
             MDList:
                 id: container5
 
@@ -252,10 +254,10 @@ view_loans = '''
             right_action_items: [['refresh', lambda x: root.refresh()]]
             md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
-        
+
             MDList:
                 id: container6
-                
+
 <ViewLoansProfileScreens>
     BoxLayout:
         orientation: 'vertical'
@@ -301,7 +303,7 @@ view_loans = '''
                             cols: 2
                             spacing: dp(10)
                             padding: dp(10)
-                            
+
                             MDLabel:
                                 text: "User ID:" 
                                 size_hint_y:None
@@ -314,7 +316,7 @@ view_loans = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                             MDLabel:
                                 text: "Borrower Name:" 
                                 size_hint_y:None
@@ -344,7 +346,7 @@ view_loans = '''
                                 height:dp(50)
                                 halign: "center"
                                 bold: True
-                                
+
                             MDLabel:
                                 id: tenure
                                 text: "" 
@@ -363,7 +365,7 @@ view_loans = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                             MDLabel:
                                 text: "Credit Limit:" 
                                 size_hint_y:None
@@ -469,7 +471,7 @@ view_loans = '''
                             cols: 2
                             spacing: dp(10)
                             padding: dp(10)
-                            
+
                             MDLabel:
                                 text: "User ID:" 
                                 size_hint_y:None
@@ -482,7 +484,7 @@ view_loans = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                             MDLabel:
                                 text: "Borrower Name:" 
                                 size_hint_y:None
@@ -512,7 +514,7 @@ view_loans = '''
                                 height:dp(50)
                                 halign: "center"
                                 bold: True
-                                
+
                             MDLabel:
                                 id: tenure
                                 text: "" 
@@ -531,7 +533,7 @@ view_loans = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                             MDLabel:
                                 text: "Credit Limit:" 
                                 size_hint_y:None
@@ -655,16 +657,13 @@ class ALlLoansScreen(Screen):
         sm.current = 'ViewLoansProfileScreens2'
         self.manager.get_screen('ViewLoansProfileScreens2').initialize_with_value(value, data)
 
-
     def on_pre_enter(self):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
 
-
     def on_pre_leave(self):
         # Unbind the back button event when leaving the screen
         Window.unbind(on_keyboard=self.on_back_button)
-
 
     def on_back_button(self, instance, key, scancode, codepoint, modifier):
         # Handle the back button event
@@ -673,17 +672,14 @@ class ALlLoansScreen(Screen):
             return True  # Consume the event, preventing further handling
         return False  # Continue handling the event
 
-
     def go_back(self):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'ViewLoansScreen'
 
-
     def refresh(self):
         self.ids.container2.clear_widgets()
         self.__init__()
-
 
     def get_table_data(self):
         # Make a call to the Anvil server function
@@ -744,8 +740,7 @@ class ViewLoansScreen(Screen):
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_all_loanscreen(modal_view), 2)
 
-
-    def performance_all_loanscreen(self,modal_view):
+    def performance_all_loanscreen(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
         modal_view.dismiss()
         sm = self.manager
@@ -779,7 +774,6 @@ class ViewLoansScreen(Screen):
         # Perform the actual action (e.g., fetching loan requests)
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_go_to_open_loans(modal_view), 2)
-
 
     def performance_go_to_open_loans(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
@@ -830,8 +824,6 @@ class ViewLoansScreen(Screen):
         # Switch to the LoginScreen
         sm.current = 'ViewApprovedLoansScreen'
 
-
-
     def go_to_rejected_loans(self):
         modal_view = ModalView(size_hint=(None, None), size=(500, 200), background_color=[0, 0, 0, 0])
 
@@ -852,7 +844,6 @@ class ViewLoansScreen(Screen):
         # Perform the actual action (e.g., fetching loan requests)
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_go_to_rejected_loans(modal_view), 2)
-
 
     def performance_go_to_rejected_loans(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
@@ -924,7 +915,6 @@ class ViewLoansScreen(Screen):
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_go_to_closed_loans(modal_view), 2)
 
-
     def performance_go_to_closed_loans(self, modal_view):
         # self.manager.current = 'ViewProfileScreen'
         modal_view.dismiss()
@@ -938,6 +928,7 @@ class ViewLoansScreen(Screen):
 
         # Switch to the LoginScreen
         sm.current = 'ViewClosedLoansScreen'
+
 
 class OpenViewLoanScreen(Screen):
     def __init__(self, **kwargs):
@@ -979,7 +970,6 @@ class OpenViewLoanScreen(Screen):
             item.bind(on_release=self.icon_button_clicked)  # Corrected the binding
             self.ids.container1.add_widget(item)
 
-
     def icon_button_clicked(self, instance):
         # Handle the on_release event here
         value = instance.text.split(':')
@@ -1001,11 +991,9 @@ class OpenViewLoanScreen(Screen):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
 
-
     def on_pre_leave(self):
         # Unbind the back button event when leaving the screen
         Window.unbind(on_keyboard=self.on_back_button)
-
 
     def on_back_button(self, instance, key, scancode, codepoint, modifier):
         # Handle the back button event
@@ -1014,22 +1002,20 @@ class OpenViewLoanScreen(Screen):
             return True  # Consume the event, preventing further handling
         return False  # Continue handling the event
 
-
     def go_back(self):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'ViewLoansScreen'
 
-
     def refresh(self):
         self.ids.container1.clear_widgets()
         self.__init__()
-
 
     def get_table_data(self):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_table_data')
+
 
 class ViewLoansProfileScreens(Screen):
     def __init__(self, **kwargs):
@@ -1109,6 +1095,7 @@ class ViewLoansProfileScreens(Screen):
         elif self.ids.status.text == 'closed':
             self.manager.current = 'ViewClosedLoansScreen'
 
+
 class ViewLoansProfileScreens2(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -1169,6 +1156,8 @@ class ViewLoansProfileScreens2(Screen):
         self.manager.transition = SlideTransition(direction='right')
 
         self.manager.current = 'ALlLoansScreen'
+
+
 class ViewApprovedLoansScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -1209,7 +1198,6 @@ class ViewApprovedLoansScreen(Screen):
             item.bind(on_release=self.icon_button_clicked)  # Corrected the binding
             self.ids.container3.add_widget(item)
 
-
     def icon_button_clicked(self, instance):
         # Handle the on_release event here
         value = instance.text.split(':')
@@ -1231,11 +1219,9 @@ class ViewApprovedLoansScreen(Screen):
         # Bind the back button event to the on_back_button method
         Window.bind(on_keyboard=self.on_back_button)
 
-
     def on_pre_leave(self):
         # Unbind the back button event when leaving the screen
         Window.unbind(on_keyboard=self.on_back_button)
-
 
     def on_back_button(self, instance, key, scancode, codepoint, modifier):
         # Handle the back button event
@@ -1244,22 +1230,20 @@ class ViewApprovedLoansScreen(Screen):
             return True  # Consume the event, preventing further handling
         return False  # Continue handling the event
 
-
     def go_back(self):
         # Navigate to the previous screen with a slide transition
         self.manager.transition = SlideTransition(direction='right')
         self.manager.current = 'ViewLoansScreen'
 
-
     def refresh(self):
         self.ids.container3.clear_widgets()
         self.__init__()
-
 
     def get_table_data(self):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_table_data')
+
 
 class ViewRejectedLoansScreen(Screen):
     def __init__(self, **kwargs):
@@ -1347,91 +1331,107 @@ class ViewRejectedLoansScreen(Screen):
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_table_data')
 
+
+
 class ViewUnderProcessLoansScreen(Screen):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        data = self.get_table_data()
-        customer_id = []
-        loan_id = []
-        borrower_name = []
-        loan_status = []
-        s = 0
-        for i in data:
-            s += 1
-            customer_id.append(i['borrower_customer_id'])
-            loan_id.append(i['loan_id'])
-            borrower_name.append(i['borrower_full_name'])
-            loan_status.append(i['loan_updated_status'])
+        container = ObjectProperty(None)
 
-        c = -1
-        index_list = []
-        for i in range(s):
-            c += 1
-            if loan_status[c] == 'under process':
-                index_list.append(c)
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.refresh_list()
 
-        b = 1
-        k = -1
-        for i in index_list:
-            b += 1
-            k += 1
-            item = ThreeLineAvatarIconListItem(
+        def refresh_list(self):
+            self.container.clear_widgets()
+            data = self.get_table_data()
+            customer_id = []
+            loan_id = []
+            borrower_name = []
+            loan_status = []
+            s = 0
+            for i in data:
+                s += 1
+                customer_id.append(i['borrower_customer_id'])
+                loan_id.append(i['loan_id'])
+                borrower_name.append(i['borrower_full_name'])
+                loan_status.append(i['loan_updated_status'])
 
-                IconLeftWidget(
-                    icon="card-account-details-outline"
-                ),
-                text=f"Loan ID : {loan_id[i]}",
-                secondary_text=f"Borrower Name: {borrower_name[i]}",
-                tertiary_text=f"Status: {loan_status[i]}",
-            )
-            item.bind(on_release=self.icon_button_clicked)  # Corrected the binding
-            self.ids.container5.add_widget(item)
+            c = -1
+            index_list = []
+            for i in range(s):
+                c += 1
+                if loan_status[c] == 'under process':
+                    index_list.append(c)
 
-    def icon_button_clicked(self, instance):
-        # Handle the on_release event here
-        value = instance.text.split(':')
-        value = value[-1][1:]
-        data = self.get_table_data()
-        sm = self.manager
+            b = 1
+            k = -1
+            for i in index_list:
+                b += 1
+                k += 1
+                item = ThreeLineAvatarIconListItem(
+                    IconLeftWidget(
+                        icon="card-account-details-outline"
+                    ),
+                    text=f"Loan ID : {loan_id[i]}",
+                    secondary_text=f"Borrower Name: {borrower_name[i]}",
+                    tertiary_text=f"Status: {loan_status[i]}",
+                )
+                item.bind(on_release=self.icon_button_clicked)
+                self.container.add_widget(item)
 
-        # Create a new instance of the LoginScreen
-        profile = ViewLoansProfileScreens(name='ViewLoansProfileScreens')
+        def icon_button_clicked(self, instance):
+            # Deselect all other items
+            for child in self.container.children:
+                if isinstance(child, ThreeLineAvatarIconListItem):
+                    child.bg_color = (1, 1, 1, 1)
 
-        # Add the LoginScreen to the existing ScreenManager
-        sm.add_widget(profile)
+            # Change the background color of the clicked item
+            instance.bg_color = (0.5, 0.5, 0.5, 1)  # Change color as desired
 
-        # Switch to the LoginScreen
-        sm.current = 'ViewLoansProfileScreens'
-        self.manager.get_screen('ViewLoansProfileScreens').initialize_with_value(value, data)
+            # Handle other operations here...
+            value = instance.text.split(':')
+            value = value[-1][1:]
+            data = self.get_table_data()
+            sm = self.manager
 
-    def on_pre_enter(self):
-        # Bind the back button event to the on_back_button method
-        Window.bind(on_keyboard=self.on_back_button)
+            # Create a new instance of the LoginScreen
+            profile = ViewLoansProfileScreens(name='ViewLoansProfileScreens')
 
-    def on_pre_leave(self):
-        # Unbind the back button event when leaving the screen
-        Window.unbind(on_keyboard=self.on_back_button)
+            # Add the LoginScreen to the existing ScreenManager
+            sm.add_widget(profile)
 
-    def on_back_button(self, instance, key, scancode, codepoint, modifier):
-        # Handle the back button event
-        if key == 27:  # 27 is the keycode for the hardware back button on Android
-            self.go_back()
-            return True  # Consume the event, preventing further handling
-        return False  # Continue handling the event
+            # Switch to the LoginScreen
+            sm.current = 'ViewLoansProfileScreens'
+            self.manager.get_screen('ViewLoansProfileScreens').initialize_with_value(value, data)
 
-    def go_back(self):
-        # Navigate to the previous screen with a slide transition
-        self.manager.transition = SlideTransition(direction='right')
-        self.manager.current = 'ViewLoansScreen'
+        def on_pre_enter(self):
+            # Bind the back button event to the on_back_button method
+            Window.bind(on_keyboard=self.on_back_button)
 
-    def refresh(self):
-        self.ids.container5.clear_widgets()
-        self.__init__()
+        def on_pre_leave(self):
+            # Unbind the back button event when leaving the screen
+            Window.unbind(on_keyboard=self.on_back_button)
 
-    def get_table_data(self):
-        # Make a call to the Anvil server function
-        # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
-        return anvil.server.call('get_table_data')
+        def on_back_button(self, instance, key, scancode, codepoint, modifier):
+            # Handle the back button event
+            if key == 27:  # 27 is the keycode for the hardware back button on Android
+                self.go_back()
+                return True  # Consume the event, preventing further handling
+            return False  # Continue handling the event
+
+        def go_back(self):
+            # Navigate to the previous screen with a slide transition
+            self.manager.transition = SlideTransition(direction='right')
+            self.manager.current = 'ViewLoansScreen'
+
+        def refresh(self):
+            self.container.clear_widgets()
+            self.refresh_list()
+
+        def get_table_data(self):
+            # Make a call to the Anvil server function
+            # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
+            return anvil.server.call('get_table_data')
+
 
 class ViewClosedLoansScreen(Screen):
     def __init__(self, **kwargs):
@@ -1518,5 +1518,7 @@ class ViewClosedLoansScreen(Screen):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_table_data')
+
+
 class MyScreenManager(ScreenManager):
     pass

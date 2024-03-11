@@ -15,12 +15,13 @@ from dashboard import DashScreen
 from lender_dashboard import LenderDashboard
 from borrower_dashboard import DashboardScreen
 import bcrypt
+
 anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
 
 KV = """
 <WindowManager>:
     LoginScreen:
-    
+
 
 
 <LoginScreen>:
@@ -174,8 +175,8 @@ KV = """
 """
 Builder.load_string(KV)
 
-class LoginScreen(Screen):
 
+class LoginScreen(Screen):
 
     def on_checkbox_active(self, checkbox, value):
         # Handle checkbox state change
@@ -244,7 +245,7 @@ class LoginScreen(Screen):
         if not entered_password:
             self.show_error_dialog("Please enter password")
             self.hide_loading_spinner()
-             # Hide spinner in case of error
+            # Hide spinner in case of error
             return
 
         # Start another thread for SQLite operations
@@ -399,8 +400,6 @@ class LoginScreen(Screen):
         dialog.open()
         self.hide_loading_spinner()
 
-
-
     def go_to_signup(self):
         from signup import SignupScreen
         sm = self.manager
@@ -414,6 +413,7 @@ class LoginScreen(Screen):
         # Clear input fields when navigating back to the login page
         self.ids.email.text = ""
         self.ids.password.text = ""
+
     def on_pre_leave(self):
         Window.unbind(on_keyboard=self.on_back_button)
 

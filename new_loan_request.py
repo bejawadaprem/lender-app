@@ -71,7 +71,7 @@ user_helpers2 = """
                     id: credit_limit        
                     text: "" 
                     font_size:dp(20)
-                    
+
         MDGridLayout:
             cols: 2
             BoxLayout:
@@ -88,7 +88,7 @@ user_helpers2 = """
                     id: product_id       
                     text: "" 
                     font_size:dp(20)
-                    
+
         MDGridLayout:
             cols: 2
             BoxLayout:
@@ -596,8 +596,7 @@ class NewloanScreen(Screen):
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_go_to_newloan_screen1(modal_view), 2)
 
-
-    def performance_go_to_newloan_screen1(self,modal_view):
+    def performance_go_to_newloan_screen1(self, modal_view):
 
         selected_group = self.ids.group_id1.text
         selected_category = self.ids.group_id2.text
@@ -723,7 +722,7 @@ class NewloanScreen1(Screen):
         # You can replace the sleep with your actual logic
         Clock.schedule_once(lambda dt: self.performance_go_to_newloan_screen2(modal_view), 2)
 
-    def performance_go_to_newloan_screen2(self,modal_view):
+    def performance_go_to_newloan_screen2(self, modal_view):
 
         loan_amount = self.ids.text_input1.text
         loan_tenure = self.ids.text_input2.text

@@ -14,7 +14,7 @@ Landing = '''
 <MyScreenManager>:
     LenderLanding:
     LenderHowScreen:
-    
+
 
 <LenderLanding>:
 

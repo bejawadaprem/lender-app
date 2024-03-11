@@ -279,7 +279,6 @@ class SignupScreen(Screen):
         self.ids.mobile.input_type = 'number'
 
     def save_to_database(self):
-
         try:
             # Connect to the SQLite database
             conn = sqlite3.connect("fin_user_profile.db")
@@ -294,15 +293,15 @@ class SignupScreen(Screen):
             for i in c_id:
                 id_c.append(i['customer_id'])
 
-            if len(id_c) >= 1:
-                user_id = id_c[-1] + 1
-            else:
-                user_id = 1000
-
             if latest_user_id is not None:
                 next_user_id = latest_user_id[0] + 1
             else:
                 next_user_id = 1000
+
+            if id_c:
+                user_id = id_c[-1] + 1
+            else:
+                user_id = 1000
 
             hash_pashword = bcrypt.hashpw(self.ids.password.text.encode('utf-8'), bcrypt.gensalt())
             hash_pashword = hash_pashword.decode('utf-8')
@@ -328,8 +327,8 @@ class SignupScreen(Screen):
                           name=self.ids.name.text, number=self.ids.mobile.text, enable=True)
             conn.commit()
         except sqlite3.Error as e:
-
             print(f"SQLite error: {e}")
+            # Handle the error here, e.g., show an error message or log it
 
     def add_data(self, user_id, email, password, name, number, enable):
         # Ensure 'YOUR_ANVIL_UPLINK_KEY' is replaced with your actual Anvil Uplink key

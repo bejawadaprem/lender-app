@@ -43,6 +43,7 @@ lender_foreclouser = '''
             left_action_items: [['arrow-left', lambda x: root.on_back_button_press()]]
             title_align: 'left'
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
+            md_bg_color: 0.043, 0.145, 0.278, 1
 
         MDGridLayout:
             cols: 2
@@ -58,8 +59,7 @@ lender_foreclouser = '''
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
-
+                md_bg_color: 0.043, 0.145, 0.278, 1
                 size_hint_y: None
                 height: dp(60)
                 size_hint_x: None
@@ -81,7 +81,7 @@ lender_foreclouser = '''
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1 
                 on_release: root.go_to_under_loans()
                 size_hint_y: None
                 height: dp(60)
@@ -104,7 +104,7 @@ lender_foreclouser = '''
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1 
                 on_release: root.go_to_reject_loans()
                 size_hint_y: None
                 height: dp(60)
@@ -127,7 +127,7 @@ lender_foreclouser = '''
                 size_hint: None, None
 
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1
 
                 size_hint_y: None
                 height: dp(60)
@@ -150,7 +150,7 @@ lender_foreclouser = '''
 
             MDFlatButton:
                 size_hint: None, None
-                md_bg_color: 0.031, 0.463, 0.91, 1 
+                md_bg_color: 0.043, 0.145, 0.278, 1 
 
                 size_hint_y: None
                 height: dp(60)
@@ -176,6 +176,7 @@ lender_foreclouser = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back_screen()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:
@@ -189,6 +190,7 @@ lender_foreclouser = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back_screen()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:
@@ -201,6 +203,7 @@ lender_foreclouser = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back_screen()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:
@@ -213,6 +216,7 @@ lender_foreclouser = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back_screen()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:
@@ -225,6 +229,7 @@ lender_foreclouser = '''
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.go_back_screen()]]
             right_action_items: [['refresh', lambda x: root.refresh()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
         MDScrollView:
 
             MDList:
@@ -237,6 +242,7 @@ lender_foreclouser = '''
             title: "View Profile"
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.on_back_button_press()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
 
         ScrollView:
             MDBoxLayout:
@@ -488,6 +494,7 @@ lender_foreclouser = '''
             title: "View Profile"
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.on_back_button_press()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
 
         ScrollView:
             MDBoxLayout:
@@ -710,6 +717,7 @@ lender_foreclouser = '''
             title: "View Profile"
             elevation: 3
             left_action_items: [['arrow-left', lambda x: root.on_back_button_press()]]
+            md_bg_color: 0.043, 0.145, 0.278, 1
 
         ScrollView:
             MDBoxLayout:

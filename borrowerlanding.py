@@ -12,7 +12,7 @@ BorrLanding = '''
 <WindowManager>:
     BorrowerLanding:
     BorrowerHowScreen:
-    
+
 <BorrowerLanding>:
     ScrollView:
         MDFloatLayout:

@@ -30,7 +30,6 @@ class MyApp(MDApp):
             return True
         return False
 
-
     def on_keyboard(self, window, key, *args):
         if key == 27:  # Key code for the 'Escape' key
             # Keyboard is closed, move the screen down

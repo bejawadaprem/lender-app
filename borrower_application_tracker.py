@@ -1,4 +1,4 @@
-
+import anvil
 from kivy import platform
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -15,10 +15,6 @@ from kivymd.uix.list import ThreeLineAvatarIconListItem, IconLeftWidget
 import anvil.server
 
 anvil.server.connect("server_VRGEXX5AO24374UMBBQ24XN6-ZAWBX57M6ZDN6TBV")
-<<<<<<< HEAD
-
-=======
->>>>>>> cdda6af27ebdb5044321574e230b32560a8d8745
 
 application_tracker = """
 
@@ -44,6 +40,7 @@ application_tracker = """
         orientation: 'vertical'
         size_hint: 1, 1 
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        md_bg_color: 0.043, 0.145, 0.278, 1
 
         MDTopAppBar:
             title: "Application status"

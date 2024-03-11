@@ -97,7 +97,7 @@ loan_forecloseB = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-        
+
                         MDGridLayout:
                             cols: 2
                             spacing: dp(10)
@@ -114,7 +114,7 @@ loan_forecloseB = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                        
+
                         MDGridLayout:
                             cols: 2
                             spacing: dp(10)
@@ -147,7 +147,7 @@ loan_forecloseB = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                         MDGridLayout:
                             cols: 2
                             spacing: dp(10)
@@ -164,7 +164,7 @@ loan_forecloseB = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                         MDGridLayout:
                             cols: 2
                             spacing: dp(10)
@@ -197,7 +197,7 @@ loan_forecloseB = '''
                                 size_hint_y:None
                                 height:dp(50)
                                 halign: "center"
-                                
+
                         MDGridLayout:
                             cols: 2
                             spacing: dp(10)
@@ -218,40 +218,40 @@ loan_forecloseB = '''
                         MDGridLayout:
                             cols: 2
                             spacing: 10
-                
+
                             CheckBox:
                                 size_hint: (None, None)
                                 width: 50
                                 bold: True
                                 color: (195/255,110/255,108/255,1)
-                
+
                             MDLabel:
                                 text: "I Agree Terms and Conditions"
                                 multiline: False
-                
-                
+
+
                         MDGridLayout:
                             cols: 2
                             spacing: 30
                             padding: 20
                             size_hint: 1, 1
                             pos_hint: {'center_x': 0.48, 'center_y': 0.5}
-                
+
                             MDRaisedButton:
                                 text: "BACK"
                                 md_bg_color: 0.031, 0.463, 0.91, 1
                                 on_release: root.on_back()
                                 text_color: 1, 1, 1, 1
                                 size_hint: 1, None
-                
-                
+
+
                             MDRaisedButton:
                                 id: foreclose_button
                                 text: "FORECLOSE"
                                 md_bg_color: 0.031, 0.463, 0.91, 1
                                 on_release: root.on_back_button_press()
                                 size_hint: 1, None
-                        
+
 
 <ForecloseDetails>
     BoxLayout:
@@ -270,7 +270,7 @@ loan_forecloseB = '''
                     orientation: "vertical"
                     padding: dp(10) 
                     spacing: dp(25) 
-    
+
                     MDLabel:
                         text: "Loan Foreclosure For LoanA/C:"
                         bold: True
@@ -539,17 +539,19 @@ class LoansDetailsB(Screen):
         else:
             # Handle other loan statuses or show an error message
             pass
+
     def get_table_data(self):
         # Make a call to the Anvil server function
         # Replace 'YourAnvilFunction' with the actual name of your Anvil server function
         return anvil.server.call('get_table_data')
+
     def go_back(self):
         self.manager.current = 'DashboardScreen'
 
 
 class ViewProfileScreenFB(Screen):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)    #on_release: root.foreclose_details(loan.text)
+        super().__init__(**kwargs)  # on_release: root.foreclose_details(loan.text)
 
     def initialize_with_value(self, value, data):
         loan_id = []
@@ -606,8 +608,10 @@ class ViewProfileScreenFB(Screen):
             self.go_back()
             return True
         return False
+
     def on_back_button_press(self):
         self.manager.current = 'LoansDetailsB'
+
     def on_keyboard(self, window, key, *args):
         if key == 27:  # Key code for the 'Escape' key
             # Keyboard is closed, move the screen down

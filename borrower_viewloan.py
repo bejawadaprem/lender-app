@@ -47,7 +47,7 @@ kv = '''
             title_align: 'left'
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
             md_bg_color: 0.043, 0.145, 0.278, 1
-            
+
         MDGridLayout:
             cols: 2
             spacing: dp(15)
